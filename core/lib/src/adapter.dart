@@ -1,5 +1,8 @@
+import 'package:ab_testing_core/src/item.dart';
+
 abstract class ConfigAdapter {
-  bool get local;
+  String get name;
+
   Future<void> init(Iterable<ConfigItem> items);
   bool has(String id);
   T? get<T>(String id);

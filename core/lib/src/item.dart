@@ -2,20 +2,16 @@ class ConfigItem<T> {
   final String id;
   final T defaultValue;
   final Map<T, int>? testSegments;
-  final List<Language>? languages;
   final double sampleSize;
-  final bool paused;
+  final bool enabled;
 
   ConfigItem(
     this.id,
     this.defaultValue,
     this.testSegments,
-    this.languages,
     this.sampleSize, {
-    required this.paused,
+    required this.enabled,
   });
-
-  bool get local => languages != null;
 
   List<T>? get values => testSegments?.keys.toList();
 }
