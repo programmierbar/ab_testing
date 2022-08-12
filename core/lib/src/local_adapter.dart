@@ -14,18 +14,16 @@ class LocalConfigAdapter implements ConfigAdapter {
 
   @override
   Future<void> init(Iterable<ConfigItem> items) async {
-    final matches = items.where((item) => item.a).toList();
-    if (matches.isEmpty) return;
+    if (items.isEmpty) return;
 
     final userSeed = await _userSeed();
     final userSegment = Random(userSeed).nextDouble();
 
-    _values.addAll(Map.fromEntries(matches.where((item) {
-      // check if the user falls into the sample size of the local test
-      return (item.languages == null || item.languages!.contains(Environment.language)) &&
-          userSegment < item.sampleSize;
+    _values.addAll(Map.fromEntries(items.where((item) {
+      /// check if the user falls into the sample size of the local test
+      return userSegment < item.sampleSize;
     }).map((item) {
-      if (item.paused) {
+      if (!item.enabled) {
         return MapEntry(item.id, item.defaultValue is Enum ? (item.defaultValue as Enum).name : item.defaultValue);
       }
 

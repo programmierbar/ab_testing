@@ -10,6 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core: ^1.19.1
+  firebase_remote_config: ^2.0.11
+  ab_testing_core:
+    path: ../core
 
 dev_dependencies:
   flutter_test:
