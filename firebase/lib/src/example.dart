@@ -1,12 +1,12 @@
 import 'package:ab_testing_core/src/adapter.dart';
-import 'package:ab_testing_core/src/experiment.dart';
+import 'package:ab_testing_core/src/config.dart';
 import 'package:ab_testing_core/src/local_adapter.dart';
-import 'package:ab_testing_core/src/testing.dart';
+import 'package:ab_testing_core/src/test_value.dart';
 import 'package:ab_testing_firebase/src/firebase_adapter.dart';
 
 class ExampleConfig extends TestingConfig {
-  final Experiment<bool> localTest;
-  final Experiment<bool> remoteTest;
+  final TestValue<bool> localTest;
+  final TestValue<bool> remoteTest;
 
   factory ExampleConfig() {
     return ExampleConfig._(
@@ -16,7 +16,7 @@ class ExampleConfig extends TestingConfig {
   }
 
   ExampleConfig._(TestingAdapter localTests, TestingAdapter remoteTests)
-      : localTest = localTests.boolExperiment(id: 'localTest'),
-        remoteTest = remoteTests.boolExperiment(id: 'remoteTest'),
+      : localTest = localTests.boolTestValue(id: 'localTest'),
+        remoteTest = remoteTests.boolTestValue(id: 'remoteTest'),
         super([localTests, remoteTests]);
 }

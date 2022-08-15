@@ -1,7 +1,7 @@
-import 'package:ab_testing_core/src/experiment.dart';
+import 'package:ab_testing_core/src/test_value.dart';
 
 abstract class TestingAdapter {
-  final List<ExperimentImpl> experiments = [];
+  final List<TestValueImpl> tests = [];
 
   String get name;
 
@@ -9,17 +9,24 @@ abstract class TestingAdapter {
   bool has(String id);
   T? get<T>(String id);
 
-  Experiment<bool> boolExperiment({
+  TestValue<bool> boolTestValue({
     required String id,
     bool defaultValue = false,
     Map<bool, int>? weightedValues,
     double sampleSize = 1,
     bool active = true,
   }) {
-    return ExperimentImpl<bool>(this, id, defaultValue, weightedValues ?? {true: 1, false: 1}, sampleSize, active);
+    return TestValueImpl<bool>(
+      this,
+      id,
+      defaultValue,
+      weightedValues ?? {true: 1, false: 1},
+      sampleSize,
+      active,
+    );
   }
 
-  Experiment<int> intExperiment<T>({
+  TestValue<int> intTestValue<T>({
     required String id,
     int defaultValue = 0,
     List<int> validValues = const [],
@@ -27,7 +34,7 @@ abstract class TestingAdapter {
     double sampleSize = 1,
     bool active = true,
   }) {
-    return ExperimentImpl<int>(
+    return TestValueImpl<int>(
       this,
       id,
       defaultValue,
@@ -37,7 +44,7 @@ abstract class TestingAdapter {
     );
   }
 
-  Experiment<T> enumExperiment<T extends Enum>({
+  TestValue<T> enumTestValue<T extends Enum>({
     required String id,
     required T defaultValue,
     required List<T> validValues,
@@ -45,7 +52,7 @@ abstract class TestingAdapter {
     double sampleSize = 1,
     bool active = true,
   }) {
-    return EnumExperiment<T>(
+    return EnumTestValue<T>(
       this,
       id,
       defaultValue,

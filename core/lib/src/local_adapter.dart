@@ -13,12 +13,12 @@ class LocalTestingAdapter extends TestingAdapter {
 
   @override
   Future<void> init() async {
-    if (experiments.isEmpty) return;
+    if (tests.isEmpty) return;
 
     final userSeed = await _userSeed();
     final userSegment = Random(userSeed).nextDouble();
 
-    _values.addAll(Map.fromEntries(experiments.where((experiment) {
+    _values.addAll(Map.fromEntries(tests.where((experiment) {
       /// check if the user falls into the sample size of the local test
       return userSegment < experiment.sampleSize;
     }).map((experiment) {
@@ -31,8 +31,8 @@ class LocalTestingAdapter extends TestingAdapter {
 
       final testSegments = experiment.testSegments;
       if (testSegments != null && testSegments.isNotEmpty) {
-        // deterministically generate the test value by initializing the random
-        // generator with a combination of the user seed and test id hashcode
+        /// deterministically generate the test value by initializing the random
+        /// generator with a combination of the user seed and test id hashcode
         final random = Random(userSeed ^ experiment.id.hashCode);
         final weightSum = testSegments.values.reduce((l, r) => l + r);
         final instantWeight = random.nextInt(weightSum);

@@ -17,7 +17,7 @@ class FirebaseTestingAdapter extends UpdatableTestingAdapter {
   /// the RemoteConfigAdapter will stay uninitialized.
   @override
   Future<void> init() async {
-    if (experiments.isEmpty) return;
+    if (tests.isEmpty) return;
 
     _config = FirebaseRemoteConfig.instance;
     await _config.setConfigSettings(RemoteConfigSettings(

@@ -1,13 +1,13 @@
 import 'package:ab_testing_core/src/adapter.dart';
 
-abstract class Experiment<T> {
+abstract class TestValue<T> {
   String get id;
   T get value;
   String get stringValue;
   bool get active;
 }
 
-class ExperimentImpl<T> implements Experiment<T> {
+class TestValueImpl<T> implements TestValue<T> {
   final TestingAdapter _adapter;
 
   final String id;
@@ -16,7 +16,7 @@ class ExperimentImpl<T> implements Experiment<T> {
   final double sampleSize;
   final bool active;
 
-  ExperimentImpl(this._adapter, this.id, this.defaultValue, this.testSegments, this.sampleSize, this.active);
+  TestValueImpl(this._adapter, this.id, this.defaultValue, this.testSegments, this.sampleSize, this.active);
 
   @override
   T get value => active ? _adapter.get<T>(id) ?? defaultValue : defaultValue;
@@ -29,8 +29,8 @@ class ExperimentImpl<T> implements Experiment<T> {
   String toString() => '$runtimeType(id: $id, value: $value)';
 }
 
-class EnumExperiment<T extends Enum> extends ExperimentImpl<T> {
-  EnumExperiment(
+class EnumTestValue<T extends Enum> extends TestValueImpl<T> {
+  EnumTestValue(
       TestingAdapter adapter, String id, T defaultValue, Map<T, int>? testSegments, double sampleSize, bool enabled)
       : assert(testSegments != null),
         super(adapter, id, defaultValue, testSegments, sampleSize, enabled);
@@ -52,13 +52,13 @@ class EnumExperiment<T extends Enum> extends ExperimentImpl<T> {
   String get stringValue => value.name;
 }
 
-class ExperimentFake<T> implements Experiment<T> {
+class TestValueFake<T> implements TestValue<T> {
   @override
   final T value;
   @override
   final bool active;
 
-  ExperimentFake(this.value, {this.active = true});
+  TestValueFake(this.value, {this.active = true});
 
   @override
   String get id => 'fake';

@@ -1,8 +1,8 @@
 import 'package:ab_testing_core/src/adapter.dart';
-import 'package:ab_testing_core/src/experiment.dart';
+import 'package:ab_testing_core/src/test_value.dart';
 
 abstract class TestingLogger {
-  void log(List<Experiment> experiments);
+  void log(List<TestValue> experiments);
 }
 
 class TestingConfig {
@@ -11,8 +11,8 @@ class TestingConfig {
 
   TestingConfig(this._adapters, [this._logger]);
 
-  List<Experiment> get values => _adapters.expand((adapter) => adapter.experiments).toList();
-  List<Experiment> get activeValues => values.where((value) => value.active).toList();
+  List<TestValue> get values => _adapters.expand((adapter) => adapter.tests).toList();
+  List<TestValue> get activeValues => values.where((value) => value.active).toList();
 
   Future<void> init() async {
     await Future.wait(_adapters.map((adapter) => adapter.init()));
