@@ -1,14 +1,13 @@
 import 'package:ab_testing_core/src/adapter.dart';
-import 'package:ab_testing_core/src/item.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 
-class RemoteConfigAdapter implements UpdatableConfigAdapter {
+class FirebaseTestingAdapter extends UpdatableTestingAdapter {
   final Duration _expiration;
   final _fetchTimeout = const Duration(minutes: 1); // SDK default
   late final FirebaseRemoteConfig _config;
   Map<String, RemoteConfigValue> _values = {};
 
-  RemoteConfigAdapter([this._expiration = const Duration(hours: 4)]);
+  FirebaseTestingAdapter([this._expiration = const Duration(hours: 4)]);
 
   @override
   String get name => 'remote';
@@ -17,10 +16,10 @@ class RemoteConfigAdapter implements UpdatableConfigAdapter {
   /// of the remote config. If the specified value parameter is empty,
   /// the RemoteConfigAdapter will stay uninitialized.
   @override
-  Future<void> init(Iterable<ConfigItem> items) async {
-    if (items.isEmpty) return;
-    _config = FirebaseRemoteConfig.instance;
+  Future<void> init() async {
+    if (experiments.isEmpty) return;
 
+    _config = FirebaseRemoteConfig.instance;
     await _config.setConfigSettings(RemoteConfigSettings(
       fetchTimeout: _fetchTimeout,
       minimumFetchInterval: _expiration,
