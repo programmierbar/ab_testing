@@ -1,14 +1,14 @@
 import 'package:ab_testing_core/src/adapter.dart';
 import 'package:ab_testing_core/src/config.dart';
 import 'package:ab_testing_core/src/local_adapter.dart';
-import 'package:ab_testing_core/src/test_value.dart';
+import 'package:ab_testing_core/src/test.dart';
 
 enum ExampleEnum { control, test }
 
 class ExampleConfig extends TestingConfig {
-  final TestValue<bool> boolTestValue;
-  final TestValue<int> intTestValue;
-  final TestValue<ExampleEnum> enumTestValue;
+  final Test<bool> booleanTest;
+  final Test<int> numericTest;
+  final Test<ExampleEnum> enumeratedTest;
 
   factory ExampleConfig() {
     return ExampleConfig._(
@@ -17,12 +17,12 @@ class ExampleConfig extends TestingConfig {
   }
 
   ExampleConfig._(TestingAdapter localTests)
-      : boolTestValue = localTests.boolTestValue(id: 'boolTest'),
-        intTestValue = localTests.intTestValue(id: 'intTest'),
-        enumTestValue = localTests.enumTestValue(
-            id: 'enumTest',
-            defaultValue: ExampleEnum.control,
-            validValues: ExampleEnum.values,
-            weightedValues: {ExampleEnum.control: 1, ExampleEnum.test: 1}),
+      : booleanTest = localTests.boolean(id: 'boolTest'),
+        numericTest = localTests.numeric(id: 'intTest'),
+        enumeratedTest = localTests.enumerated(
+          id: 'enumTest',
+          defaultVariant: ExampleEnum.control,
+          weightedVariants: {ExampleEnum.control: 1, ExampleEnum.test: 1},
+        ),
         super([localTests]);
 }
