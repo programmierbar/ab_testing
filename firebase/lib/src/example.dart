@@ -1,7 +1,4 @@
-import 'package:ab_testing_core/src/adapter.dart';
-import 'package:ab_testing_core/src/config.dart';
-import 'package:ab_testing_core/src/local_adapter.dart';
-import 'package:ab_testing_core/src/test.dart';
+import 'package:ab_testing_core/core.dart';
 import 'package:ab_testing_firebase/src/firebase_adapter.dart';
 
 class ExampleConfig extends TestingConfig {

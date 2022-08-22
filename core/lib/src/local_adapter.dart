@@ -1,15 +1,12 @@
 import 'dart:math';
 
-import 'package:ab_testing_core/src/adapter.dart';
+import 'package:ab_testing_core/core.dart';
 
 class LocalTestingAdapter extends TestingAdapter {
   final Future<int> Function() _userSeed;
   final Map<String, dynamic> _values = {};
 
   LocalTestingAdapter(this._userSeed);
-
-  @override
-  String get name => 'local';
 
   @override
   Future<void> init() async {

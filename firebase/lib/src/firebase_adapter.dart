@@ -1,4 +1,4 @@
-import 'package:ab_testing_core/src/adapter.dart';
+import 'package:ab_testing_core/core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 
 class FirebaseTestingAdapter extends UpdatableTestingAdapter {
@@ -8,9 +8,6 @@ class FirebaseTestingAdapter extends UpdatableTestingAdapter {
   Map<String, RemoteConfigValue> _values = {};
 
   FirebaseTestingAdapter([this._expiration = const Duration(hours: 4)]);
-
-  @override
-  String get name => 'remote';
 
   /// The init method will only initialize the previously loaded values
   /// of the remote config. If the specified value parameter is empty,
