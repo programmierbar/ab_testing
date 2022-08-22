@@ -18,38 +18,38 @@ class LocalTestingAdapter extends TestingAdapter {
     final userSeed = await _userSeed();
     final userSegment = Random(userSeed).nextDouble();
 
-    _values.addAll(Map.fromEntries(tests.where((experiment) {
+    _values.addAll(Map.fromEntries(tests.where((test) {
       /// check if the user falls into the sample size of the local test
-      return userSegment < experiment.sampleSize;
-    }).map((experiment) {
-      if (!experiment.active) {
+      return userSegment < test.sampleSize;
+    }).map((test) {
+      if (!test.active) {
         return MapEntry(
-          experiment.id,
-          experiment.defaultValue is Enum ? (experiment.defaultValue as Enum).name : experiment.defaultValue,
+          test.id,
+          test.defaultVariant is Enum ? (test.defaultVariant as Enum).name : test.defaultVariant,
         );
       }
 
-      final testSegments = experiment.testSegments;
+      final testSegments = test.weightedVariants;
       if (testSegments != null && testSegments.isNotEmpty) {
         /// deterministically generate the test value by initializing the random
         /// generator with a combination of the user seed and test id hashcode
-        final random = Random(userSeed ^ experiment.id.hashCode);
+        final random = Random(userSeed ^ test.id.hashCode);
         final weightSum = testSegments.values.reduce((l, r) => l + r);
         final instantWeight = random.nextInt(weightSum);
 
         int rollingSum = 0;
         for (final entry in testSegments.entries) {
-          final test = entry.key;
+          final variant = entry.key;
           final weight = entry.value;
 
           rollingSum += weight;
           if (instantWeight < rollingSum) {
-            return MapEntry(experiment.id, test is Enum ? test.name : test);
+            return MapEntry(test.id, variant is Enum ? variant.name : variant);
           }
         }
       }
 
-      return MapEntry(experiment.id, null);
+      return MapEntry(test.id, null);
     })));
   }
 

@@ -1,65 +1,70 @@
-import 'package:ab_testing_core/src/test_value.dart';
+import 'package:ab_testing_core/src/test.dart';
 
 abstract class TestingAdapter {
-  final List<TestValueImpl> tests = [];
-
-  String get name;
+  final List<AdaptedTest> tests = [];
 
   Future<void> init();
   bool has(String id);
   T? get<T>(String id);
 
-  TestValue<bool> boolTestValue({
+  Test<bool> boolean({
     required String id,
-    bool defaultValue = false,
-    Map<bool, int>? weightedValues,
+    bool defaultVariant = false,
+    Map<bool, int>? weightedVariants,
     double sampleSize = 1,
     bool active = true,
   }) {
-    return TestValueImpl<bool>(
+    return _add(AdaptedTest<bool>(
       this,
       id,
-      defaultValue,
-      weightedValues ?? {true: 1, false: 1},
-      sampleSize,
       active,
-    );
+      defaultVariant,
+      weightedVariants ?? {true: 1, false: 1},
+      sampleSize,
+    ));
   }
 
-  TestValue<int> intTestValue<T>({
+  Test<int> numeric<T>({
     required String id,
-    int defaultValue = 0,
-    List<int> validValues = const [],
-    Map<int, int>? weightedValues,
+    int defaultVariant = 0,
+    List<int>? variants,
+    Map<int, int>? weightedVariants,
     double sampleSize = 1,
     bool active = true,
   }) {
-    return TestValueImpl<int>(
+    return _add(AdaptedTest<int>(
       this,
       id,
-      defaultValue,
-      weightedValues ?? {for (final value in validValues) value: 1},
-      sampleSize,
       active,
-    );
+      defaultVariant,
+      weightedVariants ?? variants?.asMap().map((_, value) => MapEntry(value, 1)),
+      sampleSize,
+    ));
   }
 
-  TestValue<T> enumTestValue<T extends Enum>({
+  Test<T> enumerated<T extends Enum>({
     required String id,
-    required T defaultValue,
-    required List<T> validValues,
-    Map<T, int>? weightedValues,
+    required T defaultVariant,
+    List<T>? variants,
+    Map<T, int>? weightedVariants,
     double sampleSize = 1,
     bool active = true,
   }) {
-    return EnumTestValue<T>(
+    assert(variants != null && weightedVariants != null, 'Either variants or weightedVariants must be provided');
+    return _add(EnumeratedTest<T>(
       this,
       id,
-      defaultValue,
-      weightedValues ?? {for (final value in validValues) value: 1},
-      sampleSize,
       active,
-    );
+      defaultVariant,
+      weightedVariants ?? variants?.asMap().map((_, variant) => MapEntry(variant, 1)),
+      sampleSize,
+    ));
+  }
+
+  Test<T> _add<T>(AdaptedTest<T> test) {
+    assert(!tests.any((lookup) => lookup.id == test.id), 'Another Test with id ${test.id} already defined');
+    tests.add(test);
+    return test;
   }
 }
 
