@@ -50,7 +50,7 @@ abstract class TestingAdapter {
     double sampleSize = 1,
     bool active = true,
   }) {
-    assert(variants != null && weightedVariants != null, 'Either variants or weightedVariants must be provided');
+    assert(variants != null || weightedVariants != null, 'Either variants or weightedVariants must be provided');
     return _add(EnumeratedTest<T>(
       this,
       id,
