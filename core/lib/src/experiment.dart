@@ -1,13 +1,13 @@
 import 'package:ab_testing_core/src/adapter.dart';
 
-abstract class Test<T> {
+abstract class Experiment<T> {
   String get id;
   T get value;
   String get stringValue;
   bool get active;
 }
 
-class AdaptedTest<T> implements Test<T> {
+class AdaptedExperiment<T> implements Experiment<T> {
   final TestingAdapter _adapter;
 
   final String id;
@@ -16,7 +16,7 @@ class AdaptedTest<T> implements Test<T> {
   final Map<T, int>? weightedVariants;
   final double sampleSize;
 
-  AdaptedTest(
+  AdaptedExperiment(
     this._adapter,
     this.id,
     this.active,
@@ -37,8 +37,8 @@ class AdaptedTest<T> implements Test<T> {
   String toString() => '$runtimeType(id: $id, value: $value)';
 }
 
-class EnumeratedTest<T extends Enum> extends AdaptedTest<T> {
-  EnumeratedTest(
+class EnumeratedExperiment<T extends Enum> extends AdaptedExperiment<T> {
+  EnumeratedExperiment(
     TestingAdapter adapter,
     String id,
     bool active,
@@ -65,13 +65,13 @@ class EnumeratedTest<T extends Enum> extends AdaptedTest<T> {
   String get stringValue => value.name;
 }
 
-class FakeTest<T> implements Test<T> {
+class FakeExperiment<T> implements Experiment<T> {
   @override
   final T value;
   @override
   final bool active;
 
-  FakeTest(this.value, {this.active = true});
+  FakeExperiment(this.value, {this.active = true});
 
   @override
   String get id => 'fake';

@@ -10,12 +10,12 @@ class LocalTestingAdapter extends TestingAdapter {
 
   @override
   Future<void> init() async {
-    if (tests.isEmpty) return;
+    if (experiments.isEmpty) return;
 
     final userSeed = await _userSeed();
     final userSegment = Random(userSeed).nextDouble();
 
-    _values.addAll(Map.fromEntries(tests.where((test) {
+    _values.addAll(Map.fromEntries(experiments.where((test) {
       /// check if the user falls into the sample size of the local test
       return userSegment < test.sampleSize;
     }).map((test) {

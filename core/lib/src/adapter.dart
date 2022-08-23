@@ -1,20 +1,20 @@
-import 'package:ab_testing_core/src/test.dart';
+import 'package:ab_testing_core/src/experiment.dart';
 
 abstract class TestingAdapter {
-  final List<AdaptedTest> tests = [];
+  final List<AdaptedExperiment> experiments = [];
 
   Future<void> init();
   bool has(String id);
   T? get<T>(String id);
 
-  Test<bool> boolean({
+  Experiment<bool> boolean({
     required String id,
     bool defaultVariant = false,
     Map<bool, int>? weightedVariants,
     double sampleSize = 1,
     bool active = true,
   }) {
-    return _add(AdaptedTest<bool>(
+    return _add(AdaptedExperiment<bool>(
       this,
       id,
       active,
@@ -24,7 +24,7 @@ abstract class TestingAdapter {
     ));
   }
 
-  Test<int> numeric<T>({
+  Experiment<int> numeric<T>({
     required String id,
     int defaultVariant = 0,
     List<int>? variants,
@@ -32,7 +32,7 @@ abstract class TestingAdapter {
     double sampleSize = 1,
     bool active = true,
   }) {
-    return _add(AdaptedTest<int>(
+    return _add(AdaptedExperiment<int>(
       this,
       id,
       active,
@@ -42,7 +42,7 @@ abstract class TestingAdapter {
     ));
   }
 
-  Test<T> enumerated<T extends Enum>({
+  Experiment<T> enumerated<T extends Enum>({
     required String id,
     required T defaultVariant,
     List<T>? variants,
@@ -51,7 +51,7 @@ abstract class TestingAdapter {
     bool active = true,
   }) {
     assert(variants != null || weightedVariants != null, 'Either variants or weightedVariants must be provided');
-    return _add(EnumeratedTest<T>(
+    return _add(EnumeratedExperiment<T>(
       this,
       id,
       active,
@@ -61,9 +61,9 @@ abstract class TestingAdapter {
     ));
   }
 
-  Test<T> _add<T>(AdaptedTest<T> test) {
-    assert(!tests.any((lookup) => lookup.id == test.id), 'Another Test with id ${test.id} already defined');
-    tests.add(test);
+  Experiment<T> _add<T>(AdaptedExperiment<T> test) {
+    assert(!experiments.any((lookup) => lookup.id == test.id), 'Another Test with id ${test.id} already defined');
+    experiments.add(test);
     return test;
   }
 }

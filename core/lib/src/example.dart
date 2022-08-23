@@ -1,14 +1,14 @@
 import 'package:ab_testing_core/src/adapter.dart';
 import 'package:ab_testing_core/src/config.dart';
+import 'package:ab_testing_core/src/experiment.dart';
 import 'package:ab_testing_core/src/local_adapter.dart';
-import 'package:ab_testing_core/src/test.dart';
 
 enum ExampleEnum { control, test }
 
 class ExampleConfig extends TestingConfig {
-  final Test<bool> booleanTest;
-  final Test<int> numericTest;
-  final Test<ExampleEnum> enumeratedTest;
+  final Experiment<bool> booleanExperiment;
+  final Experiment<int> numericExperiment;
+  final Experiment<ExampleEnum> enumeratedExperiment;
 
   factory ExampleConfig() {
     return ExampleConfig._(
@@ -17,9 +17,9 @@ class ExampleConfig extends TestingConfig {
   }
 
   ExampleConfig._(TestingAdapter localTests)
-      : booleanTest = localTests.boolean(id: 'boolTest'),
-        numericTest = localTests.numeric(id: 'intTest'),
-        enumeratedTest = localTests.enumerated(
+      : booleanExperiment = localTests.boolean(id: 'boolTest'),
+        numericExperiment = localTests.numeric(id: 'intTest'),
+        enumeratedExperiment = localTests.enumerated(
           id: 'enumTest',
           defaultVariant: ExampleEnum.control,
           weightedVariants: {ExampleEnum.control: 1, ExampleEnum.test: 1},

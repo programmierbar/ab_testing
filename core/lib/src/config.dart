@@ -1,8 +1,8 @@
 import 'package:ab_testing_core/src/adapter.dart';
-import 'package:ab_testing_core/src/test.dart';
+import 'package:ab_testing_core/src/experiment.dart';
 
 abstract class TestingLogger {
-  void log(List<Test> experiments);
+  void log(List<Experiment> experiments);
 }
 
 class TestingConfig {
@@ -11,13 +11,13 @@ class TestingConfig {
 
   TestingConfig(this._adapters, [this._logger]);
 
-  List<Test> get tests => _adapters.expand((adapter) => adapter.tests).toList();
-  List<Test> get activeTests => tests.where((value) => value.active).toList();
+  List<Experiment> get experiments => _adapters.expand((adapter) => adapter.experiments).toList();
+  List<Experiment> get activeExperiments => experiments.where((value) => value.active).toList();
 
   Future<void> init() async {
     await Future.wait(_adapters.map((adapter) => adapter.init()));
     update();
-    _logger?.log(activeTests);
+    _logger?.log(activeExperiments);
   }
 
   Future<void> update({bool force = false}) async {
@@ -27,5 +27,5 @@ class TestingConfig {
     }
   }
 
-  Map<String, String> asMap() => {for (var item in tests) item.id: item.stringValue};
+  Map<String, String> asMap() => {for (var item in experiments) item.id: item.stringValue};
 }
