@@ -8,6 +8,7 @@ enum ExampleEnum { control, test }
 class ExampleConfig extends TestingConfig {
   final Experiment<bool> booleanExperiment;
   final Experiment<int> numericExperiment;
+  final Experiment<String> textExperiment;
   final Experiment<ExampleEnum> enumeratedExperiment;
 
   factory ExampleConfig() {
@@ -17,10 +18,11 @@ class ExampleConfig extends TestingConfig {
   }
 
   ExampleConfig._(TestingAdapter localTests)
-      : booleanExperiment = localTests.boolean(id: 'boolTest'),
-        numericExperiment = localTests.numeric(id: 'intTest'),
+      : booleanExperiment = localTests.boolean(id: 'boolExperiment'),
+        numericExperiment = localTests.numeric(id: 'intExperiment'),
+        textExperiment = localTests.text(id: 'textExperiment'),
         enumeratedExperiment = localTests.enumerated(
-          id: 'enumTest',
+          id: 'enumExperiment',
           defaultVariant: ExampleEnum.control,
           weightedVariants: {ExampleEnum.control: 1, ExampleEnum.test: 1},
         ),

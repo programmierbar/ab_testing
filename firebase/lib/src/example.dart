@@ -13,7 +13,7 @@ class ExampleConfig extends TestingConfig {
   }
 
   ExampleConfig._(TestingAdapter localTests, TestingAdapter remoteTests)
-      : localExperiment = localTests.boolean(id: 'localTest'),
-        remoteExperiment = remoteTests.boolean(id: 'remoteTest'),
+      : localExperiment = localTests.boolean(id: 'localExperiment'),
+        remoteExperiment = remoteTests.boolean(id: 'remoteExperiment'),
         super([localTests, remoteTests]);
 }

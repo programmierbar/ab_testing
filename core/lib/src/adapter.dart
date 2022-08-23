@@ -42,6 +42,24 @@ abstract class TestingAdapter {
     ));
   }
 
+  Experiment<String> text<T>({
+    required String id,
+    String defaultVariant = '',
+    List<String>? variants,
+    Map<String, int>? weightedVariants,
+    double sampleSize = 1,
+    bool active = true,
+  }) {
+    return _add(AdaptedExperiment<String>(
+      this,
+      id,
+      active,
+      defaultVariant,
+      weightedVariants ?? variants?.asMap().map((_, value) => MapEntry(value, 1)),
+      sampleSize,
+    ));
+  }
+
   Experiment<T> enumerated<T extends Enum>({
     required String id,
     required T defaultVariant,
