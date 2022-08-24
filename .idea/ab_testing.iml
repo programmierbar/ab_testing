@@ -9,6 +9,9 @@
       <excludeFolder url="file://$MODULE_DIR$/firebase/build" />
       <excludeFolder url="file://$MODULE_DIR$/firebase/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/firebase/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/example/build" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
