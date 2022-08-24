@@ -31,8 +31,6 @@ class AdaptedExperiment<T> implements Experiment<T> {
   @override
   String get stringValue => value.toString();
 
-  bool get tracked => !active && _adapter.has(id);
-
   @override
   String toString() => '$runtimeType(id: $id, value: $value)';
 }
