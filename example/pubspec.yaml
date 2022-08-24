@@ -14,6 +14,11 @@ dependencies:
     path: ../core
   ab_testing_firebase:
     path: ../firebase
+  firebase_core: ^1.19.1
+  firebase_remote_config: ^2.0.11
+  flutter_mobx: ^2.0.4
+  provider: ^6.0.2
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:
