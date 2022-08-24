@@ -1,4 +1,4 @@
-import 'package:example/app/page/home_page.dart';
+import 'package:ab_testing_example/app/page/home_page.dart';
 import 'package:flutter/material.dart';
 
 enum ButtonColor { red, blue, green }

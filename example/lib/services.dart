@@ -1,9 +1,9 @@
 import 'package:ab_testing_core/core.dart';
+import 'package:ab_testing_example/app/storage/storage.dart';
+import 'package:ab_testing_example/app/utility/console_logger.dart';
+import 'package:ab_testing_example/app/viewmodel/home_model.dart';
+import 'package:ab_testing_example/tests.dart';
 import 'package:ab_testing_firebase/firebase.dart';
-import 'package:example/app/storage/storage.dart';
-import 'package:example/app/utility/console_logger.dart';
-import 'package:example/app/viewmodel/home_model.dart';
-import 'package:example/tests.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 

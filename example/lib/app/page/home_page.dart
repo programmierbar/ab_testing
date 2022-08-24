@@ -1,4 +1,4 @@
-import 'package:example/app/viewmodel/home_model.dart';
+import 'package:ab_testing_example/app/viewmodel/home_model.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {

@@ -1,5 +1,5 @@
-import 'package:example/app/utility/console_logger.dart';
-import 'package:example/tests.dart';
+import 'package:ab_testing_example/app/utility/console_logger.dart';
+import 'package:ab_testing_example/tests.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

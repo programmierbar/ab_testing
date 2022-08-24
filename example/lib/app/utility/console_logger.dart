@@ -7,7 +7,7 @@ class ConsoleLogger implements TestingLogger {
 
   @override
   void log(String entry) {
-    print('[$domain] ${entry.toString()}'); // ignore: avoid_print
+    print('[$domain] $entry'); // ignore: avoid_print
   }
 
   @override
