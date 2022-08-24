@@ -3,15 +3,14 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 
 class FirebaseTestingAdapter extends UpdatableTestingAdapter {
   final Duration _expiration;
+  final TestingLogger? _logger;
   final _fetchTimeout = const Duration(minutes: 1); // SDK default
   late final FirebaseRemoteConfig _config;
   Map<String, RemoteConfigValue> _values = {};
 
-  FirebaseTestingAdapter([this._expiration = const Duration(hours: 4)]);
+  FirebaseTestingAdapter([this._expiration = const Duration(hours: 4), this._logger]);
 
-  /// The init method will only initialize the previously loaded values
-  /// of the remote config. If the specified value parameter is empty,
-  /// the RemoteConfigAdapter will stay uninitialized.
+  /// If no experiments are provided the adapter will stay uninitialized.
   @override
   Future<void> init() async {
     if (experiments.isEmpty) return;
@@ -40,7 +39,7 @@ class FirebaseTestingAdapter extends UpdatableTestingAdapter {
         await _config.activate();
       }
     } catch (error) {
-      // Failed to fetch remote config
+      _logger?.log('Failed to fetch remote config');
     }
     _values = _config.getAll();
     if (force) {

@@ -15,9 +15,9 @@ class LocalTestingAdapter extends TestingAdapter {
     final userSeed = await _userSeed();
     final userSegment = Random(userSeed).nextDouble();
 
-    _values.addAll(Map.fromEntries(experiments.where((test) {
+    _values.addAll(Map.fromEntries(experiments.where((experiment) {
       /// check if the user falls into the sample size of the local test
-      return userSegment < test.sampleSize;
+      return userSegment < experiment.sampleSize;
     }).map((test) {
       if (!test.active) {
         return MapEntry(

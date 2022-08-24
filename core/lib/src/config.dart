@@ -2,7 +2,8 @@ import 'package:ab_testing_core/src/adapter.dart';
 import 'package:ab_testing_core/src/experiment.dart';
 
 abstract class TestingLogger {
-  void log(List<Experiment> experiments);
+  void log(String message);
+  void logExperiments(List<Experiment> experiments);
 }
 
 class TestingConfig {
@@ -17,7 +18,7 @@ class TestingConfig {
   Future<void> init() async {
     await Future.wait(_adapters.map((adapter) => adapter.init()));
     update();
-    _logger?.log(activeExperiments);
+    _logger?.logExperiments(activeExperiments);
   }
 
   Future<void> update({bool force = false}) async {
@@ -25,6 +26,7 @@ class TestingConfig {
     if (adapters.isNotEmpty) {
       await Future.wait(adapters.map((adapter) => adapter.update(force: force)));
     }
+    _logger?.logExperiments(activeExperiments);
   }
 
   Map<String, String> asMap() => {for (var item in experiments) item.id: item.stringValue};
