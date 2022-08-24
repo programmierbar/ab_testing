@@ -14,7 +14,7 @@ You can also extend the package with further adapters. It supports test values o
 
 You need to add `ab_testing_core` and `ab_testing_firebase` to the dependencies of the pubspec.yaml.
 
-```dart
+```
 dependencies:
 ab_testing_core: ^1.0.0
 ab_testing_firebase: ^1.0.0

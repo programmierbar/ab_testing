@@ -11,7 +11,7 @@ The package `ab_testing_firebase` provides an additional firebase adapter that s
 
 You need to add `ab_testing_core` to the dependencies of the pubspec.yaml.
 
-```dart
+```
 dependencies:
 ab_testing_core: ^1.0.0
 ```

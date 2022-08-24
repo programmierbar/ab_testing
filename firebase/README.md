@@ -8,7 +8,7 @@ This package extends the `ab_testing_core` package with an additional firebase a
 
 You need to add `ab_testing_core` and `ab_testing_firebase` to the dependencies of the pubspec.yaml.
 
-```dart
+```
 dependencies:
 ab_testing_core: ^1.0.0
 ab_testing_firebase: ^1.0.0
