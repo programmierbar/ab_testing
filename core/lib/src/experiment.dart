@@ -10,7 +10,9 @@ abstract class Experiment<T> {
 class AdaptedExperiment<T> implements Experiment<T> {
   final TestingAdapter _adapter;
 
+  @override
   final String id;
+  @override
   final bool active;
   final T defaultVariant;
   final Map<T, int>? weightedVariants;

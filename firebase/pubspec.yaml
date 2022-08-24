@@ -2,7 +2,7 @@ name: ab_testing_firebase
 description: A new Flutter package project.
 publish_to: 'none'
 version: 0.0.1
-homepage:
+homepage: ''
 
 environment:
   sdk: ">=2.16.1 <3.0.0"
