@@ -6,7 +6,7 @@ This package extends the `ab_testing_core` package with an additional firebase a
 
 ## Getting started
 
-You need to do add `ab_testing_core` and `ab_testing_firebase` to the dependencies of the pubspec.yaml
+You need to add `ab_testing_core` and `ab_testing_firebase` to the dependencies of the pubspec.yaml.
 
 ```dart
 dependencies:
@@ -16,23 +16,30 @@ ab_testing_firebase: ^1.0.0
 
 ## Usage
 
-You can create your own testing config with all the test values you need. Directly during initialisation, you can select which adapter is to be used for the respective test value.
+You can create your own configuration that extends the TestingConfig class with all the adapters and experiments you need. Directly during initialisation, you can select which adapter should be used for the respective experiment.
 
 ```dart
 class ExampleConfig extends TestingConfig {
-  final TestValue<bool> localTest;
-  final TestValue<bool> remoteTest;
+  final Experiment<bool> localExperiment;
+  final Experiment<bool> remoteExperiment;
 
-  factory ExampleConfig() {
-    return ExampleConfig._(
-      LocalTestingAdapter(() async => 12345),
-      FirebaseTestingAdapter(),
-    );
-  }
-
-  ExampleConfig._(TestingAdapter localTests, TestingAdapter remoteTests)
-      : localTest = localTests.boolTestValue(id: 'localTest'),
-        remoteTest = remoteTests.boolTestValue(id: 'remoteTest'),
+  ExampleConfig(TestingAdapter localTests, TestingAdapter remoteTests)
+      : localExperiment = localTests.boolean(id: 'localExperiment'),
+        remoteExperiment = remoteTests.boolean(id: 'remoteExperiment'),
         super([localTests, remoteTests]);
 }
+```
+
+After initialisation, you can pass your Testing Adapters to your Config.
+
+```dart
+final _localTests = LocalTestingAdapter(_storage.userSeed);
+final _testConfig = ExampleConfig(_localTests);
+```
+
+Afterwards, you can easily access the experiments in your app via your Config.
+
+```dart
+bool get local => _testConfig.localExperiment.value;
+bool get remote => _testConfig.remoteExperiment.value;
 ```

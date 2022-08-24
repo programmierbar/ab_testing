@@ -1,5 +1,5 @@
 name: ab_testing_firebase
-description: A new Flutter package project.
+description: A package for remote a/b testing with the Firebase Remote Config.
 publish_to: 'none'
 version: 0.0.1
 homepage: ''

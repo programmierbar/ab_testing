@@ -1,5 +1,5 @@
 name: example
-description: A new Flutter project.
+description: An example Flutter project for the ab_testing package.
 publish_to: 'none'
 version: 1.0.0+1
 
