@@ -16,31 +16,31 @@ ab_testing_firebase: ^1.0.0
 
 ## Usage
 
-You can create your own configuration that extends the TestingConfig class with all the adapters and experiments you need. Directly during initialisation, you can select which adapter should be used for the respective experiment.
+You can create your own configuration that extends the ExperimentConfig class with all the adapters and experiments you need. Directly during initialisation, you can select which adapter should be used for the respective experiment.
 
 ```dart
-class ExampleExperimentsConfig extends ExperimentsConfig {
+class ExampleExperimentConfig extends ExperimentConfig {
   final Experiment<bool> localExperiment;
   final Experiment<bool> remoteExperiment;
 
-  ExampleExperimentsConfig(ExperimentsAdapter localExperiments, ExperimentsAdapter remoteExperiments)
+  ExampleExperimentConfig(ExperimentAdapter localExperiments, ExperimentAdapter remoteExperiments)
       : localExperiment = localExperiments.boolean(id: 'localExperiment'),
         remoteExperiment = remoteExperiments.boolean(id: 'remoteExperiment'),
         super([localExperiments, remoteExperiments]);
 }
 ```
 
-After initialisation, you can pass your ExperimentsAdapters to your ExperimentsConfig.
+After initialisation, you can pass your ExperimentAdapters to your ExperimentConfig.
 
 ```dart
-final _localExperiments = LocalExperimentsAdapter(_storage.userSeed);
-final _remoteExperiments = FirebaseExperimentsAdapter();
-final _experimentsConfig = ExampleExperimentsConfig(_localExperiments, _remoteExperiments);
+final _localExperiments = LocalExperimentAdapter(_storage.userSeed);
+final _remoteExperiments = FirebaseExperimentAdapter();
+final _experimentConfig = ExampleExperimentConfig(_localExperiments, _remoteExperiments);
 ```
 
 Afterwards, you can easily access the experiments in your app via your Config.
 
 ```dart
-bool get local => _experimentsConfig.localExperiment.value;
-bool get remote => _experimentsConfig.remoteExperiment.value;
+bool get local => _experimentConfig.localExperiment.value;
+bool get remote => _experimentConfig.remoteExperiment.value;
 ```

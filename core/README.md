@@ -18,17 +18,17 @@ ab_testing_core: ^1.0.0
 
 ## Usage
 
-You can create your own configuration that extends the ExperimentsConfig class with all the adapters and experiments you need. Directly during initialisation, you can select which adapter should be used for the respective experiment.
+You can create your own configuration that extends the ExperimentConfig class with all the adapters and experiments you need. Directly during initialisation, you can select which adapter should be used for the respective experiment.
 
 
 ```dart
-class LocalExperimentsConfig extends ExperimentsConfig {
+class LocalExperimentConfig extends ExperimentConfig {
   final Experiment<bool> booleanExperiment;
   final Experiment<int> numericExperiment;
   final Experiment<String> textExperiment;
   final Experiment<ExampleEnum> enumeratedExperiment;
 
-  LocalExperimentsConfig(ExperimentsAdapter localExperiments)
+  LocalExperimentConfig(ExperimentAdapter localExperiments)
       : booleanExperiment = localExperiments.boolean(id: 'boolExperiment'),
         numericExperiment = localExperiments.numeric(id: 'intExperiment'),
         textExperiment = localExperiments.text(id: 'textExperiment'),
@@ -41,18 +41,18 @@ class LocalExperimentsConfig extends ExperimentsConfig {
 }
 ```
 
-After initialisation, you can pass your ExperimentAdapters to your ExperimentsConfig.
+After initialisation, you can pass your ExperimentAdapters to your ExperimentConfig.
 
 ```dart
-final _localExperiments = LocalExperimentsAdapter(_storage.userSeed);
-final _experimentsConfig = LocalExperimentsConfig(_localExperiments);
+final _localExperiments = LocalExperimentAdapter(_storage.userSeed);
+final _experimentConfig = LocalExperimentConfig(_localExperiments);
 ```
 
 Afterwards, you can easily access the experiments in your app via your Config.
 
 ```dart
-bool get boolean => _experimentsConfig.booleanExperiment.value;
-int get numeric => _experimentsConfig.numericExperiment.value;
-String get text => _experimentsConfig.textExperiment.value;
-ExampleEnum get enumerated => _experimentsConfig.enumeratedExperiment.value;
+bool get boolean => _experimentConfig.booleanExperiment.value;
+int get numeric => _experimentConfig.numericExperiment.value;
+String get text => _experimentConfig.textExperiment.value;
+ExampleEnum get enumerated => _experimentConfig.enumeratedExperiment.value;
 ```
