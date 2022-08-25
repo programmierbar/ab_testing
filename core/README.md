@@ -18,41 +18,41 @@ ab_testing_core: ^1.0.0
 
 ## Usage
 
-You can create your own configuration that extends the TestingConfig class with all the adapters and experiments you need. Directly during initialisation, you can select which adapter should be used for the respective experiment.
+You can create your own configuration that extends the ExperimentsConfig class with all the adapters and experiments you need. Directly during initialisation, you can select which adapter should be used for the respective experiment.
 
 
 ```dart
-class ExampleConfig extends TestingConfig {
+class LocalExperimentsConfig extends ExperimentsConfig {
   final Experiment<bool> booleanExperiment;
   final Experiment<int> numericExperiment;
   final Experiment<String> textExperiment;
   final Experiment<ExampleEnum> enumeratedExperiment;
 
-  ExampleConfig(TestingAdapter localTests)
-      : booleanExperiment = localTests.boolean(id: 'boolExperiment'),
-        numericExperiment = localTests.numeric(id: 'intExperiment'),
-        textExperiment = localTests.text(id: 'textExperiment'),
-        enumeratedExperiment = localTests.enumerated(
+  LocalExperimentsConfig(ExperimentsAdapter localExperiments)
+      : booleanExperiment = localExperiments.boolean(id: 'boolExperiment'),
+        numericExperiment = localExperiments.numeric(id: 'intExperiment'),
+        textExperiment = localExperiments.text(id: 'textExperiment'),
+        enumeratedExperiment = localExperiments.enumerated(
           id: 'enumExperiment',
           defaultVariant: ExampleEnum.control,
           weightedVariants: {ExampleEnum.control: 1, ExampleEnum.test: 1},
         ),
-        super([localTests]);
+        super([localExperiments]);
 }
 ```
 
-After initialisation, you can pass your Testing Adapters to your Config.
+After initialisation, you can pass your ExperimentAdapters to your ExperimentsConfig.
 
 ```dart
-final _localTests = LocalTestingAdapter(_storage.userSeed);
-final _testConfig = ExampleConfig(_localTests);
+final _localExperiments = LocalExperimentsAdapter(_storage.userSeed);
+final _experimentsConfig = LocalExperimentsConfig(_localExperiments);
 ```
 
 Afterwards, you can easily access the experiments in your app via your Config.
 
 ```dart
-bool get boolean => _testConfig.booleanExperiment.value;
-int get numeric => _testConfig.numericExperiment.value;
-String get text => _testConfig.textExperiment.value;
-ExampleEnum get enumerated => _testConfig.enumeratedExperiment.value;
+bool get boolean => _experimentsConfig.booleanExperiment.value;
+int get numeric => _experimentsConfig.numericExperiment.value;
+String get text => _experimentsConfig.textExperiment.value;
+ExampleEnum get enumerated => _experimentsConfig.enumeratedExperiment.value;
 ```

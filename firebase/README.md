@@ -19,27 +19,28 @@ ab_testing_firebase: ^1.0.0
 You can create your own configuration that extends the TestingConfig class with all the adapters and experiments you need. Directly during initialisation, you can select which adapter should be used for the respective experiment.
 
 ```dart
-class ExampleConfig extends TestingConfig {
+class ExampleExperimentsConfig extends ExperimentsConfig {
   final Experiment<bool> localExperiment;
   final Experiment<bool> remoteExperiment;
 
-  ExampleConfig(TestingAdapter localTests, TestingAdapter remoteTests)
-      : localExperiment = localTests.boolean(id: 'localExperiment'),
-        remoteExperiment = remoteTests.boolean(id: 'remoteExperiment'),
-        super([localTests, remoteTests]);
+  ExampleExperimentsConfig(ExperimentsAdapter localExperiments, ExperimentsAdapter remoteExperiments)
+      : localExperiment = localExperiments.boolean(id: 'localExperiment'),
+        remoteExperiment = remoteExperiments.boolean(id: 'remoteExperiment'),
+        super([localExperiments, remoteExperiments]);
 }
 ```
 
-After initialisation, you can pass your Testing Adapters to your Config.
+After initialisation, you can pass your ExperimentsAdapters to your ExperimentsConfig.
 
 ```dart
-final _localTests = LocalTestingAdapter(_storage.userSeed);
-final _testConfig = ExampleConfig(_localTests);
+final _localExperiments = LocalExperimentsAdapter(_storage.userSeed);
+final _remoteExperiments = FirebaseExperimentsAdapter();
+final _experimentsConfig = ExampleExperimentsConfig(_localExperiments, _remoteExperiments);
 ```
 
 Afterwards, you can easily access the experiments in your app via your Config.
 
 ```dart
-bool get local => _testConfig.localExperiment.value;
-bool get remote => _testConfig.remoteExperiment.value;
+bool get local => _experimentsConfig.localExperiment.value;
+bool get remote => _experimentsConfig.remoteExperiment.value;
 ```
