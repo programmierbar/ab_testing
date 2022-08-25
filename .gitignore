@@ -27,3 +27,6 @@
 .dart_tool/
 .packages
 build/
+/core/pubspec.lock
+/example/pubspec.lock
+/firebase/pubspec.lock

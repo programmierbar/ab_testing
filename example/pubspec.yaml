@@ -8,9 +8,15 @@ environment:
 
 dependencies:
   ab_testing_core:
-    path: ../core
+    git:
+      url: https://github.com/programmierbar/ab_testing.git
+      ref: master
+      path: core
   ab_testing_firebase:
-    path: ../firebase
+    git:
+      url: https://github.com/programmierbar/ab_testing.git
+      ref: master
+      path: firebase
   cupertino_icons: ^1.0.2
   firebase_core: ^1.19.1
   firebase_remote_config: ^2.0.11
