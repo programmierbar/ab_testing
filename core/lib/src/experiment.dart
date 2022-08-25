@@ -8,7 +8,7 @@ abstract class Experiment<T> {
 }
 
 class AdaptedExperiment<T> implements Experiment<T> {
-  final TestingAdapter _adapter;
+  final ExperimentsAdapter _adapter;
 
   @override
   final String id;
@@ -39,7 +39,7 @@ class AdaptedExperiment<T> implements Experiment<T> {
 
 class EnumeratedExperiment<T extends Enum> extends AdaptedExperiment<T> {
   EnumeratedExperiment(
-    TestingAdapter adapter,
+    ExperimentsAdapter adapter,
     String id,
     bool active,
     T defaultVariant,

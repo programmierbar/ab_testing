@@ -1,6 +1,6 @@
 import 'package:ab_testing_core/core.dart';
 
-class ConsoleLogger implements TestingLogger {
+class ConsoleLogger implements ExperimentsLogger {
   final String domain;
 
   ConsoleLogger(this.domain);

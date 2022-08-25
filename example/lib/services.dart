@@ -8,13 +8,13 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 final _storage = Storage();
-final _localTests = LocalTestingAdapter(_storage.userSeed);
-final _remoteTests = FirebaseTestingAdapter();
-final _testConfig = TestConfig(_localTests, _remoteTests, ConsoleLogger('app'));
+final _localTests = LocalExperimentsAdapter(_storage.userSeed);
+final _remoteTests = FirebaseExperimentsAdapter();
+final _testConfig = Config(_localTests, _remoteTests, ConsoleLogger('app'));
 final _homeModel = HomeModel(_testConfig);
 
 final List<SingleChildWidget> serviceProviders = [
-  Provider<TestConfig>.value(value: _testConfig),
+  Provider<Config>.value(value: _testConfig),
   Provider<HomeModel>.value(value: _homeModel),
 ];
 

@@ -3,43 +3,43 @@ import 'package:ab_testing_firebase/firebase.dart';
 
 enum ExampleEnum { control, test }
 
-class ExampleConfigLocal extends TestingConfig {
+class LocalExperimentsConfig extends ExperimentsConfig {
   final Experiment<bool> booleanExperiment;
   final Experiment<int> numericExperiment;
   final Experiment<String> textExperiment;
   final Experiment<ExampleEnum> enumeratedExperiment;
 
-  factory ExampleConfigLocal() {
-    return ExampleConfigLocal._(
-      LocalTestingAdapter(() async => 12345),
+  factory LocalExperimentsConfig() {
+    return LocalExperimentsConfig._(
+      LocalExperimentsAdapter(() async => 12345),
     );
   }
 
-  ExampleConfigLocal._(TestingAdapter localTests)
-      : booleanExperiment = localTests.boolean(id: 'boolExperiment'),
-        numericExperiment = localTests.numeric(id: 'intExperiment'),
-        textExperiment = localTests.text(id: 'textExperiment'),
-        enumeratedExperiment = localTests.enumerated(
+  LocalExperimentsConfig._(ExperimentsAdapter localExperiments)
+      : booleanExperiment = localExperiments.boolean(id: 'boolExperiment'),
+        numericExperiment = localExperiments.numeric(id: 'intExperiment'),
+        textExperiment = localExperiments.text(id: 'textExperiment'),
+        enumeratedExperiment = localExperiments.enumerated(
           id: 'enumExperiment',
           defaultVariant: ExampleEnum.control,
           weightedVariants: {ExampleEnum.control: 1, ExampleEnum.test: 1},
         ),
-        super([localTests]);
+        super([localExperiments]);
 }
 
-class ExampleConfigLocalAndRemote extends TestingConfig {
+class ExampleExperimentsConfig extends ExperimentsConfig {
   final Experiment<bool> localExperiment;
   final Experiment<bool> remoteExperiment;
 
-  factory ExampleConfigLocalAndRemote() {
-    return ExampleConfigLocalAndRemote._(
-      LocalTestingAdapter(() async => 12345),
-      FirebaseTestingAdapter(),
+  factory ExampleExperimentsConfig() {
+    return ExampleExperimentsConfig._(
+      LocalExperimentsAdapter(() async => 12345),
+      FirebaseExperimentsAdapter(),
     );
   }
 
-  ExampleConfigLocalAndRemote._(TestingAdapter localTests, TestingAdapter remoteTests)
-      : localExperiment = localTests.boolean(id: 'localExperiment'),
-        remoteExperiment = remoteTests.boolean(id: 'remoteExperiment'),
-        super([localTests, remoteTests]);
+  ExampleExperimentsConfig._(ExperimentsAdapter localExperiments, ExperimentsAdapter remoteExperiments)
+      : localExperiment = localExperiments.boolean(id: 'localExperiment'),
+        remoteExperiment = remoteExperiments.boolean(id: 'remoteExperiment'),
+        super([localExperiments, remoteExperiments]);
 }

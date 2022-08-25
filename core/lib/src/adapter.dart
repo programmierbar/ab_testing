@@ -1,6 +1,6 @@
 import 'package:ab_testing_core/src/experiment.dart';
 
-abstract class TestingAdapter {
+abstract class ExperimentsAdapter {
   final List<AdaptedExperiment> experiments = [];
 
   Future<void> init();
@@ -79,13 +79,14 @@ abstract class TestingAdapter {
     ));
   }
 
-  Experiment<T> _add<T>(AdaptedExperiment<T> test) {
-    assert(!experiments.any((lookup) => lookup.id == test.id), 'Another Test with id ${test.id} already defined');
-    experiments.add(test);
-    return test;
+  Experiment<T> _add<T>(AdaptedExperiment<T> experiment) {
+    assert(!experiments.any((lookup) => lookup.id == experiment.id),
+        'Another Experiment with id ${experiment.id} already defined');
+    experiments.add(experiment);
+    return experiment;
   }
 }
 
-abstract class UpdatableTestingAdapter extends TestingAdapter {
+abstract class UpdatableExperimentsAdapter extends ExperimentsAdapter {
   Future<void> update({bool force = false});
 }

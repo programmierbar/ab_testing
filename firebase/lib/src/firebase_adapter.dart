@@ -1,14 +1,14 @@
 import 'package:ab_testing_core/core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 
-class FirebaseTestingAdapter extends UpdatableTestingAdapter {
+class FirebaseExperimentsAdapter extends UpdatableExperimentsAdapter {
   final Duration _expiration;
-  final TestingLogger? _logger;
+  final ExperimentsLogger? _logger;
   final _fetchTimeout = const Duration(minutes: 1); // SDK default
   late final FirebaseRemoteConfig _config;
   Map<String, RemoteConfigValue> _values = {};
 
-  FirebaseTestingAdapter([this._expiration = const Duration(hours: 4), this._logger]);
+  FirebaseExperimentsAdapter([this._expiration = const Duration(hours: 4), this._logger]);
 
   /// If no experiments are provided the adapter will stay uninitialized.
   @override
