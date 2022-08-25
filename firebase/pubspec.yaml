@@ -10,7 +10,10 @@ environment:
 
 dependencies:
   ab_testing_core:
-    path: ../core
+    git:
+      url: https://github.com/programmierbar/ab_testing.git
+      ref: master
+      path: core
   firebase_core: ^1.14.0
   firebase_remote_config: ^2.0.3
   flutter:

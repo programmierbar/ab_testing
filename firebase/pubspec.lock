@@ -4,9 +4,11 @@ packages:
   ab_testing_core:
     dependency: "direct main"
     description:
-      path: "../core"
-      relative: true
-    source: path
+      path: core
+      ref: master
+      resolved-ref: cf209b1a587e5adc08f40b24ef0b108b160a1d64
+      url: "https://github.com/programmierbar/ab_testing.git"
+    source: git
     version: "0.0.1"
   async:
     dependency: transitive
