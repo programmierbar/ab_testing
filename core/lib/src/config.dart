@@ -1,16 +1,16 @@
 import 'package:ab_testing_core/src/adapter.dart';
 import 'package:ab_testing_core/src/experiment.dart';
 
-abstract class ExperimentsLogger {
+abstract class ExperimentLogger {
   void log(String message);
   void logExperiments(List<Experiment> experiments);
 }
 
-class ExperimentsConfig {
-  final List<ExperimentsAdapter> _adapters;
-  final ExperimentsLogger? _logger;
+class ExperimentConfig {
+  final List<ExperimentAdapter> _adapters;
+  final ExperimentLogger? _logger;
 
-  ExperimentsConfig(this._adapters, [this._logger]);
+  ExperimentConfig(this._adapters, [this._logger]);
 
   List<Experiment> get _allExperiments => _adapters.expand((adapter) => adapter.experiments).toList();
   List<Experiment> get experiments => _allExperiments.where((value) => value.active).toList();
@@ -22,7 +22,7 @@ class ExperimentsConfig {
   }
 
   Future<void> update({bool force = false}) async {
-    final adapters = _adapters.whereType<UpdatableExperimentsAdapter>();
+    final adapters = _adapters.whereType<UpdatableExperimentAdapter>();
     if (adapters.isNotEmpty) {
       await Future.wait(adapters.map((adapter) => adapter.update(force: force)));
     }

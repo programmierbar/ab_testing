@@ -2,11 +2,11 @@ import 'dart:math';
 
 import 'package:ab_testing_core/core.dart';
 
-class LocalExperimentsAdapter extends ExperimentsAdapter {
+class LocalExperimentAdapter extends ExperimentAdapter {
   final Future<int> Function() _userSeed;
   final Map<String, dynamic> _values = {};
 
-  LocalExperimentsAdapter(this._userSeed);
+  LocalExperimentAdapter(this._userSeed);
 
   @override
   Future<void> init() async {

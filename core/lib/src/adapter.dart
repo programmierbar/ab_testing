@@ -1,6 +1,6 @@
 import 'package:ab_testing_core/src/experiment.dart';
 
-abstract class ExperimentsAdapter {
+abstract class ExperimentAdapter {
   final List<AdaptedExperiment> experiments = [];
 
   Future<void> init();
@@ -87,6 +87,6 @@ abstract class ExperimentsAdapter {
   }
 }
 
-abstract class UpdatableExperimentsAdapter extends ExperimentsAdapter {
+abstract class UpdatableExperimentAdapter extends ExperimentAdapter {
   Future<void> update({bool force = false});
 }

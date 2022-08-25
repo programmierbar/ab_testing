@@ -27,7 +27,7 @@ class _ExperimentPage extends StatefulWidget {
 class _ExperimentPageState extends State<_ExperimentPage> {
   @override
   Widget build(BuildContext context) {
-    final experiments = Provider.of<ExampleExperimentsConfig>(context, listen: false);
+    final experiments = Provider.of<ExampleExperimentConfig>(context, listen: false);
 
     return Container(
       decoration: const BoxDecoration(

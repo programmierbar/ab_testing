@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 /// Initialize the local experiments adapter with an consistent seed for each user.
-final _localExperiments = LocalExperimentsAdapter(() async => 1234);
-final _remoteExperiments = FirebaseExperimentsAdapter();
-final _experimentsConfig = ExampleExperimentsConfig(_localExperiments, _remoteExperiments);
+final _localExperiments = LocalExperimentAdapter(() async => 1234);
+final _remoteExperiments = FirebaseExperimentAdapter();
+final _experimentConfig = ExampleExperimentConfig(_localExperiments, _remoteExperiments);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,11 +20,11 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  await _experimentsConfig.init();
+  await _experimentConfig.init();
 
   runApp(
     Provider(
-      create: (_) => _experimentsConfig,
+      create: (_) => _experimentConfig,
       child: const App(),
     ),
   );
