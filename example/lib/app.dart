@@ -1,24 +1,34 @@
-import 'package:ab_testing_example/app/viewmodel/home_model.dart';
+import 'package:ab_testing_example/experiments.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  late HomeModel _homeModel;
-
-  @override
-  void initState() {
-    super.initState();
-    _homeModel = HomeModel.of(context);
-  }
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return MaterialApp(
+        title: 'A/B Testing',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(scaffoldBackgroundColor: const Color(0xff21022C)),
+        builder: (context, child) {
+          return const _ExperimentPage();
+        });
+  }
+}
+
+class _ExperimentPage extends StatefulWidget {
+  const _ExperimentPage({Key? key}) : super(key: key);
+
+  @override
+  State<_ExperimentPage> createState() => _ExperimentPageState();
+}
+
+class _ExperimentPageState extends State<_ExperimentPage> {
+  @override
+  Widget build(BuildContext context) {
+    final experiments = Provider.of<ExampleExperimentsConfig>(context, listen: false);
+
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -47,24 +57,20 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _ExperimentContainer(
-                      name: 'local',
-                      value: _homeModel.localExperiment.toString(),
-                    ),
-                    _ExperimentContainer(
                       name: 'boolean',
-                      value: _homeModel.booleanExperiment.toString(),
+                      value: experiments.booleanExperiment,
                     ),
                     _ExperimentContainer(
                       name: 'numeric',
-                      value: _homeModel.numericExperiment.toString(),
+                      value: experiments.numericExperiment,
                     ),
                     _ExperimentContainer(
                       name: 'text',
-                      value: _homeModel.textExperiment,
+                      value: experiments.textExperiment,
                     ),
                     _ExperimentContainer(
                       name: 'enumerated',
-                      value: _homeModel.enumeratedExperiment.name,
+                      value: experiments.enumeratedExperiment.name,
                     ),
                   ],
                 ),
@@ -73,7 +79,7 @@ class _HomePageState extends State<HomePage> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(primary: Colors.white.withOpacity(0.3)),
                 onPressed: () async {
-                  await _homeModel.fetchNewConfigValues();
+                  await experiments.update(force: true);
                   setState(() {});
                 },
                 child: const Padding(
@@ -96,7 +102,7 @@ class _HomePageState extends State<HomePage> {
 
 class _ExperimentContainer extends StatelessWidget {
   final String name;
-  final String value;
+  final Object value;
 
   const _ExperimentContainer({
     Key? key,
@@ -122,7 +128,7 @@ class _ExperimentContainer extends StatelessWidget {
           child: Row(
             children: [
               SizedBox(width: 175, child: Text(name, style: textStyle.copyWith(color: Colors.purpleAccent))),
-              Text(value, style: textStyle),
+              Text(value.toString(), style: textStyle),
             ],
           ),
         ),
