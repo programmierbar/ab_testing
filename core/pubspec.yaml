@@ -1,6 +1,6 @@
 name: ab_testing_core
 description: A package for local a/b testing.
-version: 0.8.0
+version: 0.8.1
 homepage: https://github.com/programmierbar/ab_testing
 
 environment:

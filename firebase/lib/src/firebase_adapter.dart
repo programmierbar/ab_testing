@@ -1,4 +1,4 @@
-import 'package:ab_testing_core/core.dart';
+import 'package:ab_testing_core/ab_testing_core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 
 class FirebaseExperimentAdapter extends UpdatableExperimentAdapter {
