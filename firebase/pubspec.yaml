@@ -1,6 +1,6 @@
 name: ab_testing_firebase
 description: A package for remote a/b testing with the Firebase Remote Config.
-version: 0.8.1
+version: 0.8.2
 homepage: https://github.com/programmierbar/ab_testing
 
 environment:
@@ -8,7 +8,7 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  ab_testing_core: ^0.8.1
+  ab_testing_core: ^0.8.2
   firebase_core: ^1.14.0
   firebase_remote_config: ^2.0.3
   flutter:

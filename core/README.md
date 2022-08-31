@@ -1,3 +1,8 @@
+<img src="https://repository-images.githubusercontent.com/524068551/e6bf53a7-dcd0-4a86-9b73-2bbe2e115b2f" alt="AbTesting"
+title="AB Testing" width="480" />
+
+# AB Testing - Core
+
 A Dart package that helps to implement multiple a/b tests.
 
 ## Features
