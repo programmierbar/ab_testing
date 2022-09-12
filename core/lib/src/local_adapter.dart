@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:ab_testing_core/core.dart';
+import 'package:ab_testing_core/ab_testing_core.dart';
 
 class LocalExperimentAdapter extends ExperimentAdapter {
   final Future<int> Function() _userSeed;

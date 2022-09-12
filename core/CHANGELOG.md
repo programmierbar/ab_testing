@@ -1,15 +1,8 @@
-# Changelog
+# 0.8.2
+* Add image
 
-All notable changes to this project will be documented in this file.
+# 0.8.1
+* Adjust changelog
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
-
-## [Next Release] - YYYY-MM-DD
-### Added
-### Changed
-### Fixed
-### Removed
-
-## [0.0.1] - 2022-08-26
-Initial release.
-
+# 0.8.0
+* Initial release

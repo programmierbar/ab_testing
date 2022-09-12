@@ -1,8 +1,7 @@
 name: ab_testing_firebase
 description: A package for remote a/b testing with the Firebase Remote Config.
-publish_to: 'none'
-version: 0.0.1
-homepage: ''
+version: 0.8.2
+homepage: https://github.com/programmierbar/ab_testing
 
 environment:
   sdk: ">=2.16.1 <3.0.0"
