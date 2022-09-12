@@ -25,8 +25,10 @@ class ExperimentConfig {
     final adapters = _adapters.whereType<UpdatableExperimentAdapter>();
     if (adapters.isNotEmpty) {
       await Future.wait(adapters.map((adapter) => adapter.update(force: force)));
+      if (force){
+        _logger?.logExperiments(experiments);
+      }
     }
-    _logger?.logExperiments(experiments);
   }
 
   Map<String, String> asMap() => {for (var item in _allExperiments) item.id: item.stringValue};
