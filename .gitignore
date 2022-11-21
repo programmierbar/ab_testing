@@ -30,3 +30,5 @@ build/
 /core/pubspec.lock
 /example/pubspec.lock
 /firebase/pubspec.lock
+.flutter-plugins
+.flutter-plugins-dependencies
