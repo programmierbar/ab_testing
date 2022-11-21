@@ -1,3 +1,6 @@
+# 0.9.1
+* Update dependencies
+
 # 0.8.2
 * Add image
 
