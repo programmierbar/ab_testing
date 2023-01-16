@@ -88,7 +88,7 @@ class EnumeratedExperiment<T extends Enum> extends AdaptedExperiment<T> {
     super.adapter,
     super.id,
     super.active,
-    super.defaultValue,
+    super.defaultVariant,
     super.weightedVariants,
     super.sampleSize,
   );
