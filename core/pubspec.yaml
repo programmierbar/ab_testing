@@ -1,19 +1,13 @@
 name: ab_testing_core
-description: A package for local a/b testing.
+description:
+  A/B testing for user experience research through randomized experiments that
+  involve two or more variants.
 version: 0.9.1
-homepage: https://github.com/programmierbar/ab_testing
+repository: https://github.com/programmierbar/ab_testing
+issue_tracker: https://github.com/programmierbar/ab_testing/issues
 
 environment:
-  sdk: ">=2.16.1 <3.0.0"
-  flutter: ">=1.17.0"
-
-dependencies:
-  flutter:
-    sdk: flutter
+  sdk: '>=2.18.0 <3.0.0'
 
 dev_dependencies:
-  flutter_lints: ^1.0.0
-  flutter_test:
-    sdk: flutter
-
-flutter:
+  lints: ^2.0.1

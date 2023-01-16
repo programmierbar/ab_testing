@@ -1,30 +1,46 @@
 import 'package:ab_testing_core/ab_testing_core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 
+/// An [ExperimentAdapter] that uses the Firebase Remote Config SDK to fetch
+/// experiment values.
 class FirebaseExperimentAdapter extends UpdatableExperimentAdapter {
-  final Duration _expiration;
-  final ExperimentLogger? _logger;
+  /// The Firebase Remote Config instance that will be used to fetch values.
+  ///
+  /// If no value is provided, [FirebaseRemoteConfig.instance] will be used.
+  final FirebaseRemoteConfig? remoteConfig;
+
+  /// The expiration time of the fetched values after which they will be
+  /// refreshed.
+  final Duration expiration;
+
+  /// The logger that will be used by this adapter.
+  final ExperimentLogger? logger;
+
   final _fetchTimeout = const Duration(minutes: 1); // SDK default
-  late final FirebaseRemoteConfig _config;
   Map<String, RemoteConfigValue> _values = {};
 
-  FirebaseExperimentAdapter([this._expiration = const Duration(hours: 4), this._logger]);
+  FirebaseRemoteConfig get _remoteConfig => remoteConfig ?? FirebaseRemoteConfig.instance;
+
+  FirebaseExperimentAdapter({
+    this.remoteConfig,
+    this.expiration = const Duration(hours: 4),
+    this.logger,
+  });
 
   /// If no experiments are provided the adapter will stay uninitialized.
   @override
   Future<void> init() async {
     if (experiments.isEmpty) return;
 
-    _config = FirebaseRemoteConfig.instance;
-    await _config.setConfigSettings(RemoteConfigSettings(
+    await _remoteConfig.setConfigSettings(RemoteConfigSettings(
       fetchTimeout: _fetchTimeout,
-      minimumFetchInterval: _expiration,
+      minimumFetchInterval: expiration,
     ));
 
-    await _config.activate();
-    await _config.ensureInitialized();
+    await _remoteConfig.activate();
+    await _remoteConfig.ensureInitialized();
 
-    _values = _config.getAll();
+    _values = _remoteConfig.getAll();
   }
 
   /// The update method will fetch the config values from the remote node.
@@ -34,16 +50,16 @@ class FirebaseExperimentAdapter extends UpdatableExperimentAdapter {
       await _setFetchInterval(Duration.zero);
     }
     try {
-      await _config.fetch();
+      await _remoteConfig.fetch();
       if (force) {
-        await _config.activate();
+        await _remoteConfig.activate();
       }
     } catch (error) {
-      _logger?.log('Failed to fetch remote config');
+      logger?.log('Failed to fetch remote config');
     }
-    _values = _config.getAll();
+    _values = _remoteConfig.getAll();
     if (force) {
-      await _setFetchInterval(_expiration);
+      await _setFetchInterval(expiration);
     }
   }
 
@@ -65,7 +81,7 @@ class FirebaseExperimentAdapter extends UpdatableExperimentAdapter {
   }
 
   Future<void> _setFetchInterval(Duration duration) {
-    return _config.setConfigSettings(
+    return _remoteConfig.setConfigSettings(
       RemoteConfigSettings(
         fetchTimeout: _fetchTimeout,
         minimumFetchInterval: duration,
