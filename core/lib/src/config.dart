@@ -9,16 +9,17 @@ abstract class ExperimentLogger {
 
 /// Base class for an application's experiment configuration.
 class ExperimentConfig {
+  /// The string value that will be used for inactive experiments in [asMap].
+  final String? inactiveStringValue;
+
   final List<ExperimentAdapter> _adapters;
   final ExperimentLogger? _logger;
-  final String? _inactiveStringValue;
 
   ExperimentConfig(
     this._adapters, {
     ExperimentLogger? logger,
-    String? inactiveStringValue,
-  })  : _logger = logger,
-        _inactiveStringValue = inactiveStringValue;
+    this.inactiveStringValue,
+  }) : _logger = logger;
 
   /// All active experiments.
   List<Experiment> get experiments => _allExperiments.where((value) => value.active).toList();
@@ -47,17 +48,18 @@ class ExperimentConfig {
   /// value.
   ///
   /// If [inactiveStringValue] is set, all inactive experiments will be mapped
-  /// to this value.
-  Map<String, String> asMap() => {
-        for (final experiment in _allExperiments) //
-          experiment.id: _experimentMapValue(experiment)
-      };
-
-  String _experimentMapValue(Experiment experiment) {
-    final inactiveStringValue = _inactiveStringValue;
-    if (inactiveStringValue == null) {
-      return experiment.stringValue;
+  /// to this value. If [inactiveStringValue] is not set, inactive experiments
+  /// will not be included in the mapping.
+  Map<String, String> asMap() {
+    final inactiveStringValue = this.inactiveStringValue;
+    final result = <String, String>{};
+    for (final experiment in _allExperiments) {
+      if (experiment.active) {
+        result[experiment.id] = experiment.stringValue;
+      } else if (inactiveStringValue != null) {
+        result[experiment.id] = inactiveStringValue;
+      }
     }
-    return experiment.active ? experiment.stringValue : inactiveStringValue;
+    return result;
   }
 }
