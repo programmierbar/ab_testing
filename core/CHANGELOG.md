@@ -1,3 +1,9 @@
+## 0.11.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**: Pass complete experiment config to logger. ([e1f36960](https://github.com/programmierbar/ab_testing/commit/e1f369604cfedaef409db2c5fa0b5d7ece917301))
+
 ## 0.10.0
 
 > Note: This release has breaking changes.
