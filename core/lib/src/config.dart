@@ -4,7 +4,7 @@ import 'package:ab_testing_core/src/experiment.dart';
 /// A logger that is used to log experiment information.
 abstract class ExperimentLogger {
   void log(String message);
-  void logExperiments(List<Experiment> experiments);
+  void logExperiments(ExperimentConfig config);
 }
 
 /// Base class for an application's experiment configuration.
@@ -32,7 +32,7 @@ class ExperimentConfig {
   Future<void> init() async {
     await Future.wait(_adapters.map((adapter) => adapter.init()));
     update();
-    _logger?.logExperiments(experiments);
+    _logger?.logExperiments(this);
   }
 
   /// Updates all updatable adapters.
@@ -41,7 +41,7 @@ class ExperimentConfig {
     if (adapters.isNotEmpty) {
       await Future.wait(adapters.map((adapter) => adapter.update(force: force)));
       if (force) {
-        _logger?.logExperiments(experiments);
+        _logger?.logExperiments(this);
       }
     }
   }
