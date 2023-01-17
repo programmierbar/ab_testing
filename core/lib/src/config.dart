@@ -46,7 +46,7 @@ class ExperimentConfig {
     }
   }
 
-  /// Returns a mapping of all experiments from their id to their string
+  /// Returns a mapping of all experiments from their id to their tracking
   /// value.
   ///
   /// If [inactiveTrackingValue] is set, all inactive experiments will be mapped
