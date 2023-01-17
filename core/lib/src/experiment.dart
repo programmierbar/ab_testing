@@ -12,8 +12,9 @@ abstract class Experiment<T> {
   /// The value of this experiment.
   T get value;
 
-  /// A string representation of this experiment's [value].
-  String get stringValue;
+  /// The representation of the [value] that should be used for tracking in
+  /// analytics tools.
+  String get trackingValue;
 
   /// Whether this experiment is active.
   ///
@@ -76,13 +77,15 @@ class AdaptedExperiment<T> implements Experiment<T> {
   bool get active => _active ? _adapter.get<T>(id) != null : false;
 
   @override
-  String get stringValue => value.toString();
+  String get trackingValue => value.toString();
 
   @override
   String toString() => '$runtimeType(id: $id, value: $value)';
 }
 
 /// An [AdaptedExperiment] that uses [Enum] values to represent its [variants].
+///
+/// [Enum.name] is used for [trackingValue].
 class EnumeratedExperiment<T extends Enum> extends AdaptedExperiment<T> {
   EnumeratedExperiment(
     super.adapter,
@@ -109,7 +112,7 @@ class EnumeratedExperiment<T extends Enum> extends AdaptedExperiment<T> {
   }
 
   @override
-  String get stringValue => value.name;
+  String get trackingValue => value.name;
 }
 
 class FakeExperiment<T> implements Experiment<T> {
@@ -125,5 +128,5 @@ class FakeExperiment<T> implements Experiment<T> {
   @override
   T get defaultVariant => value;
   @override
-  String get stringValue => value.toString();
+  String get trackingValue => value.toString();
 }
