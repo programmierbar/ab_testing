@@ -1,3 +1,9 @@
+## 0.12.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FIX**: do not require variants for text and numeric experiments. ([c57a7536](https://github.com/programmierbar/ab_testing/commit/c57a75367ea30655c899b9278a7612890a5bf9cd))
+
 ## 0.11.0
 
 > Note: This release has breaking changes.

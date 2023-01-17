@@ -1,3 +1,7 @@
+## 0.10.0+3
+
+ - Update a dependency to the latest release.
+
 ## 0.10.0+2
 
  - **FIX**: Fix dependencies for core package. ([39d30372](https://github.com/programmierbar/ab_testing/commit/39d303726e829da366fe9a3d3f37d90fb385d63b))
