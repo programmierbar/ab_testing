@@ -41,6 +41,9 @@ class LocalExperimentAdapter extends ExperimentAdapter {
 
   Object _determineExperimentValue(AdaptedExperiment experiment, int userSeed) {
     final experimentSegments = experiment.weightedVariants;
+    if (experimentSegments == null || experimentSegments.isEmpty) {
+      throw ArgumentError.value(experimentSegments, 'weightedVariants', 'must not be empty');
+    }
 
     // Deterministically generate the experiment value by initializing the random
     // generator with a combination of the user seed and experiment id hash code.

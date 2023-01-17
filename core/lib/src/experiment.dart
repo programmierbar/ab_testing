@@ -39,7 +39,7 @@ class AdaptedExperiment<T> implements Experiment<T> {
   ///
   /// [LocalExperimentAdapter] uses the weights but not all [ExperimentAdapter]s
   /// do.
-  final Map<T, int> weightedVariants;
+  final Map<T, int>? weightedVariants;
 
   /// The sample size of this experiment.
   ///
@@ -60,15 +60,7 @@ class AdaptedExperiment<T> implements Experiment<T> {
     this.defaultVariant,
     this.weightedVariants,
     this.sampleSize,
-  ) : _active = active {
-    if (weightedVariants.isEmpty) {
-      throw ArgumentError.value(
-        weightedVariants,
-        'weightedVariants',
-        'must not be empty',
-      );
-    }
-  }
+  ) : _active = active;
 
   @override
   T get value => _active ? _adapter.get<T>(id) ?? defaultVariant : defaultVariant;
@@ -92,12 +84,12 @@ class EnumeratedExperiment<T extends Enum> extends AdaptedExperiment<T> {
     super.id,
     super.active,
     super.defaultVariant,
-    super.weightedVariants,
+    Map<T, int> super.weightedVariants,
     super.sampleSize,
   );
 
   /// All of the variants of this experiment.
-  List<T> get variants => weightedVariants.keys.toList();
+  List<T> get variants => weightedVariants!.keys.toList();
 
   @override
   T get value {

@@ -45,13 +45,12 @@ abstract class ExperimentAdapter {
     double sampleSize = 1,
     bool active = true,
   }) {
-    _checkVariantsArguments(variants, weightedVariants);
     return _add(AdaptedExperiment<int>(
       this,
       id,
       active,
       defaultVariant,
-      weightedVariants ?? variants!.defaultWeightedVariants,
+      weightedVariants ?? variants?.defaultWeightedVariants,
       sampleSize,
     ));
   }
@@ -65,13 +64,12 @@ abstract class ExperimentAdapter {
     double sampleSize = 1,
     bool active = true,
   }) {
-    _checkVariantsArguments(variants, weightedVariants);
     return _add(AdaptedExperiment<String>(
       this,
       id,
       active,
       defaultVariant,
-      weightedVariants ?? variants!.defaultWeightedVariants,
+      weightedVariants ?? variants?.defaultWeightedVariants,
       sampleSize,
     ));
   }
@@ -85,7 +83,10 @@ abstract class ExperimentAdapter {
     double sampleSize = 1,
     bool active = true,
   }) {
-    _checkVariantsArguments(variants, weightedVariants);
+    assert(
+      variants != null || weightedVariants != null,
+      'Either variants or weightedVariants must be provided.',
+    );
     return _add(EnumeratedExperiment<T>(
       this,
       id,
@@ -94,13 +95,6 @@ abstract class ExperimentAdapter {
       weightedVariants ?? variants!.defaultWeightedVariants,
       sampleSize,
     ));
-  }
-
-  void _checkVariantsArguments(List<Object?>? variants, Map<Object?, int>? weightedVariants) {
-    assert(
-      variants != null || weightedVariants != null,
-      'Either variants or weightedVariants must be provided.',
-    );
   }
 
   Experiment<T> _add<T>(AdaptedExperiment<T> experiment) {
