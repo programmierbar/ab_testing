@@ -1,4 +1,4 @@
-include: package:flutter_lints/flutter.yaml
+include: package:lints/recommended.yaml
 
 linter:
   rules:
@@ -10,3 +10,4 @@ linter:
     prefer_single_quotes: true
     sort_pub_dependencies: true
     unnecessary_lambdas: true
+    use_super_parameters: true

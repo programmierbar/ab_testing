@@ -1,53 +1,36 @@
+import 'dart:async';
 import 'dart:math';
 
-import 'package:ab_testing_core/ab_testing_core.dart';
+import 'package:ab_testing_core/src/adapter.dart';
+import 'package:ab_testing_core/src/experiment.dart';
 
+/// An [ExperimentAdapter] that uses [AdaptedExperiment.sampleSize] and
+/// [AdaptedExperiment.weightedVariants] to locally determine the value of an
+/// experiment.
 class LocalExperimentAdapter extends ExperimentAdapter {
-  final Future<int> Function() _userSeed;
-  final Map<String, dynamic> _values = {};
+  /// Function that resolves a seed for the current user that will be used
+  /// to deterministically select active experiments and experiment values.
+  final FutureOr<int> Function() resolveUserSeed;
 
-  LocalExperimentAdapter(this._userSeed);
+  final Map<String, Object> _values = {};
+
+  LocalExperimentAdapter({required this.resolveUserSeed});
 
   @override
   Future<void> init() async {
     if (experiments.isEmpty) return;
 
-    final userSeed = await _userSeed();
+    final userSeed = await resolveUserSeed();
     final userSegment = Random(userSeed).nextDouble();
 
-    _values.addAll(Map.fromEntries(experiments.where((experiment) {
-      /// check if the user falls into the sample size of the local experiment
-      return userSegment < experiment.sampleSize;
-    }).map((experiment) {
-      if (!experiment.active) {
-        return MapEntry(
-          experiment.id,
-          experiment.defaultVariant is Enum ? (experiment.defaultVariant as Enum).name : experiment.defaultVariant,
-        );
-      }
+    final activeExperiments = experiments.where((experiment) {
+      // Check if the user falls into the sample size of the local experiment.
+      return experiment.active && userSegment < experiment.sampleSize;
+    });
 
-      final experimentSegments = experiment.weightedVariants;
-      if (experimentSegments != null && experimentSegments.isNotEmpty) {
-        /// deterministically generate the experiment value by initializing the random
-        /// generator with a combination of the user seed and experiment id hashcode
-        final random = Random(userSeed ^ experiment.id.hashCode);
-        final weightSum = experimentSegments.values.reduce((l, r) => l + r);
-        final instantWeight = random.nextInt(weightSum);
-
-        int rollingSum = 0;
-        for (final entry in experimentSegments.entries) {
-          final variant = entry.key;
-          final weight = entry.value;
-
-          rollingSum += weight;
-          if (instantWeight < rollingSum) {
-            return MapEntry(experiment.id, variant is Enum ? variant.name : variant);
-          }
-        }
-      }
-
-      return MapEntry(experiment.id, null);
-    })));
+    for (final experiment in activeExperiments) {
+      _values[experiment.id] = _determineExperimentValue(experiment, userSeed);
+    }
   }
 
   @override
@@ -55,4 +38,27 @@ class LocalExperimentAdapter extends ExperimentAdapter {
 
   @override
   T? get<T>(String id) => _values[id] as T?;
+
+  Object _determineExperimentValue(AdaptedExperiment experiment, int userSeed) {
+    final experimentSegments = experiment.weightedVariants;
+
+    // Deterministically generate the experiment value by initializing the random
+    // generator with a combination of the user seed and experiment id hash code.
+    final random = Random(userSeed ^ experiment.id.hashCode);
+    final weightSum = experimentSegments.values.reduce((l, r) => l + r);
+    final instantWeight = random.nextInt(weightSum);
+
+    int rollingSum = 0;
+    for (final entry in experimentSegments.entries) {
+      final variant = entry.key;
+      final weight = entry.value;
+
+      rollingSum += weight;
+      if (instantWeight < rollingSum) {
+        return variant is Enum ? variant.name : variant;
+      }
+    }
+
+    throw StateError('Failed to determine experiment value.');
+  }
 }

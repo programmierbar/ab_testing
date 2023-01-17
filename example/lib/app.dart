@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class App extends StatelessWidget {
 }
 
 class _ExperimentPage extends StatefulWidget {
-  const _ExperimentPage({Key? key}) : super(key: key);
+  const _ExperimentPage();
 
   @override
   State<_ExperimentPage> createState() => _ExperimentPageState();
@@ -77,7 +77,7 @@ class _ExperimentPageState extends State<_ExperimentPage> {
               ),
               const SizedBox(height: 50),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.white.withOpacity(0.3)),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.white.withOpacity(0.3)),
                 onPressed: () async {
                   await experiments.update(force: true);
                   setState(() {});
@@ -102,13 +102,12 @@ class _ExperimentPageState extends State<_ExperimentPage> {
 
 class _ExperimentContainer extends StatelessWidget {
   final String name;
-  final Object value;
+  final Object? value;
 
   const _ExperimentContainer({
-    Key? key,
     required this.name,
     required this.value,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

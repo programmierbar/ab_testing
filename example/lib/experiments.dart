@@ -1,4 +1,4 @@
-import 'package:ab_testing_core/core.dart';
+import 'package:ab_testing_core/ab_testing_core.dart';
 
 enum ExampleEnum { control, test }
 
@@ -11,9 +11,11 @@ class ExampleExperimentConfig extends ExperimentConfig {
   final Experiment<String> _textExperiment;
   final Experiment<ExampleEnum> _enumeratedExperiment;
 
-  ExampleExperimentConfig(ExperimentAdapter localExperiments, ExperimentAdapter remoteExperiments,
-      [ExperimentLogger? logger])
-      : _booleanExperiment = localExperiments.boolean(id: 'local_bool'),
+  ExampleExperimentConfig(
+    ExperimentAdapter localExperiments,
+    ExperimentAdapter remoteExperiments, [
+    ExperimentLogger? logger,
+  ])  : _booleanExperiment = localExperiments.boolean(id: 'local_bool'),
         _numericExperiment = localExperiments.numeric(id: 'local_int'),
         _textExperiment = remoteExperiments.text(id: 'remote_text'),
         _enumeratedExperiment = remoteExperiments.enumerated(
@@ -21,7 +23,7 @@ class ExampleExperimentConfig extends ExperimentConfig {
           defaultVariant: ExampleEnum.control,
           variants: ExampleEnum.values,
         ),
-        super([localExperiments, remoteExperiments], logger);
+        super([localExperiments, remoteExperiments], logger: logger);
 
   bool get booleanExperiment => _booleanExperiment.value;
   int get numericExperiment => _numericExperiment.value;

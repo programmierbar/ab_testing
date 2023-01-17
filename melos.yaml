@@ -1,0 +1,18 @@
+name: ab_testing
+
+packages:
+  - .
+  - core
+  - firebase
+  - example
+
+command:
+  bootstrap:
+    usePubspecOverrides: true
+
+scripts:
+  format: dart format .
+
+  format:check: dart format --set-exit-if-changed .
+
+  analyze: dart analyze --fatal-infos .
