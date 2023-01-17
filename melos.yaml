@@ -1,4 +1,5 @@
 name: ab_testing
+repository: https://github.com/programmierbar/ab_testing
 
 packages:
   - .
@@ -9,6 +10,8 @@ packages:
 command:
   bootstrap:
     usePubspecOverrides: true
+  version:
+    linkToCommits: true
 
 scripts:
   format: dart format .
