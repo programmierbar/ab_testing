@@ -53,13 +53,12 @@ class ExperimentConfig {
   /// to this value. If [inactiveTrackingValue] is not set, inactive experiments
   /// will not be included in the mapping.
   Map<String, String> asMap() {
-    final inactiveStringValue = inactiveTrackingValue;
     return {
       for (final experiment in _allExperiments)
         if (experiment.active)
           experiment.id: experiment.trackingValue
-        else if (inactiveStringValue != null)
-          experiment.id: inactiveStringValue
+        else if (inactiveTrackingValue != null)
+          experiment.id: inactiveTrackingValue!
     };
   }
 }
