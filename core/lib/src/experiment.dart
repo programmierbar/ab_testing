@@ -6,6 +6,11 @@ abstract class Experiment<T> {
   /// The ID of this experiment.
   String get id;
 
+  /// Whether this experiment is active.
+  ///
+  /// Inactive experiments will always return [defaultVariant] for [value].
+  bool get active;
+
   /// The default value for users that are not part of this experiment.
   T get defaultVariant;
 
@@ -15,11 +20,6 @@ abstract class Experiment<T> {
   /// The representation of the [value] that should be used for tracking in
   /// analytics tools.
   String get trackingValue;
-
-  /// Whether this experiment is active.
-  ///
-  /// Inactive experiments will always return [defaultVariant] for [value].
-  bool get active;
 }
 
 /// An [Experiment] that is backed by an [ExperimentAdapter].
@@ -63,10 +63,10 @@ class AdaptedExperiment<T> implements Experiment<T> {
   ) : _active = active;
 
   @override
-  T get value => _active ? _adapter.get<T>(id) ?? defaultVariant : defaultVariant;
+  bool get active => _active ? _adapter.has(id) : false;
 
   @override
-  bool get active => _active ? _adapter.get<T>(id) != null : false;
+  T get value => _active ? _adapter.get<T>(id) ?? defaultVariant : defaultVariant;
 
   @override
   String get trackingValue => value.toString();
