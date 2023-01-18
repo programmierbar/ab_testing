@@ -29,7 +29,7 @@ class FirebaseExperimentAdapter extends UpdatableExperimentAdapter {
 
   /// If no experiments are provided the adapter will stay uninitialized.
   @override
-  Future<void> init() async {
+  Future<void> init(ExperimentConfig config) async {
     if (experiments.isEmpty) return;
 
     await _remoteConfig.setConfigSettings(RemoteConfigSettings(
@@ -40,12 +40,12 @@ class FirebaseExperimentAdapter extends UpdatableExperimentAdapter {
     await _remoteConfig.activate();
     await _remoteConfig.ensureInitialized();
 
-    _values = _remoteConfig.getAll();
+    _updateValues(config);
   }
 
   /// The update method will fetch the config values from the remote node.
   @override
-  Future<void> update({bool force = false}) async {
+  Future<void> update(ExperimentConfig config, {bool force = false}) async {
     if (force) {
       await _setFetchInterval(Duration.zero);
     }
@@ -57,7 +57,7 @@ class FirebaseExperimentAdapter extends UpdatableExperimentAdapter {
     } catch (error) {
       logger?.log('Failed to fetch remote config');
     }
-    _values = _remoteConfig.getAll();
+    _updateValues(config);
     if (force) {
       await _setFetchInterval(expiration);
     }
@@ -78,6 +78,16 @@ class FirebaseExperimentAdapter extends UpdatableExperimentAdapter {
     } else {
       return value.asString() as T;
     }
+  }
+
+  void _updateValues(ExperimentConfig config) {
+    _values = _remoteConfig.getAll();
+    _values.removeWhere((key, value) {
+      final variantValue = value.asString();
+      return variantValue.isEmpty || variantValue == config.inactiveVariantValue;
+    });
+    print(
+        '------------> updated firebase values: ${_values.entries.map((entry) => '${entry.key}: ${entry.value.asString()}')}');
   }
 
   Future<void> _setFetchInterval(Duration duration) {

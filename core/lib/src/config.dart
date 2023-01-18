@@ -9,10 +9,10 @@ abstract class ExperimentLogger {
 
 /// Base class for an application's experiment configuration.
 class ExperimentConfig {
-  /// The tracking value that will be used for inactive experiments in [asMap].
+  /// The variant string value that will be used for inactive experiments in [trackingValues].
   ///
   /// See also [Experiment.trackingValue].
-  final String? inactiveTrackingValue;
+  final String? inactiveVariantValue;
 
   final List<ExperimentAdapter> _adapters;
   final ExperimentLogger? _logger;
@@ -20,7 +20,7 @@ class ExperimentConfig {
   ExperimentConfig(
     this._adapters, {
     ExperimentLogger? logger,
-    this.inactiveTrackingValue,
+    this.inactiveVariantValue,
   }) : _logger = logger;
 
   /// All active experiments.
@@ -28,9 +28,25 @@ class ExperimentConfig {
 
   List<Experiment> get _allExperiments => _adapters.expand((adapter) => adapter.experiments).toList();
 
+  /// Returns a mapping of all experiments from their id to their tracking
+  /// value.
+  ///
+  /// If [inactiveVariantValue] is set, all inactive experiments will be mapped
+  /// to this value. If [inactiveVariantValue] is not set, inactive experiments
+  /// will not be included in the mapping.
+  Map<String, String> get trackingValues {
+    return {
+      for (final experiment in _allExperiments)
+        if (experiment.active)
+          experiment.id: experiment.trackingValue
+        else if (inactiveVariantValue != null)
+          experiment.id: inactiveVariantValue!
+    };
+  }
+
   /// Initializes all adapters.
   Future<void> init() async {
-    await Future.wait(_adapters.map((adapter) => adapter.init()));
+    await Future.wait(_adapters.map((adapter) => adapter.init(this)));
     update();
     _logger?.logExperiments(this);
   }
@@ -39,26 +55,10 @@ class ExperimentConfig {
   Future<void> update({bool force = false}) async {
     final adapters = _adapters.whereType<UpdatableExperimentAdapter>();
     if (adapters.isNotEmpty) {
-      await Future.wait(adapters.map((adapter) => adapter.update(force: force)));
+      await Future.wait(adapters.map((adapter) => adapter.update(this, force: force)));
       if (force) {
         _logger?.logExperiments(this);
       }
     }
-  }
-
-  /// Returns a mapping of all experiments from their id to their tracking
-  /// value.
-  ///
-  /// If [inactiveTrackingValue] is set, all inactive experiments will be mapped
-  /// to this value. If [inactiveTrackingValue] is not set, inactive experiments
-  /// will not be included in the mapping.
-  Map<String, String> asMap() {
-    return {
-      for (final experiment in _allExperiments)
-        if (experiment.active)
-          experiment.id: experiment.trackingValue
-        else if (inactiveTrackingValue != null)
-          experiment.id: inactiveTrackingValue!
-    };
   }
 }

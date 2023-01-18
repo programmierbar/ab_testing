@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:ab_testing_core/src/adapter.dart';
+import 'package:ab_testing_core/src/config.dart';
 import 'package:ab_testing_core/src/experiment.dart';
 
 /// An [ExperimentAdapter] that uses [AdaptedExperiment.sampleSize] and
@@ -17,7 +18,7 @@ class LocalExperimentAdapter extends ExperimentAdapter {
   LocalExperimentAdapter({required this.resolveUserSeed});
 
   @override
-  Future<void> init() async {
+  Future<void> init(ExperimentConfig config) async {
     if (experiments.isEmpty) return;
 
     final userSeed = await resolveUserSeed();

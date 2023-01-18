@@ -1,3 +1,4 @@
+import 'package:ab_testing_core/src/config.dart';
 import 'package:ab_testing_core/src/experiment.dart';
 
 /// Provides the backing values for experiments and serves as a registry for
@@ -9,7 +10,7 @@ abstract class ExperimentAdapter {
   final List<AdaptedExperiment> experiments = [];
 
   /// Initializes this adapter.
-  Future<void> init();
+  Future<void> init(ExperimentConfig config);
 
   /// Returns whether this adapter has a value for the experiment with the given
   /// [id].
@@ -113,7 +114,7 @@ abstract class UpdatableExperimentAdapter extends ExperimentAdapter {
   ///
   /// If [force] is true, the values will be updated regardless of whether they
   /// are stale.
-  Future<void> update({bool force = false});
+  Future<void> update(ExperimentConfig config, {bool force = false});
 }
 
 extension _DefaultWeightedVariants<T> on List<T> {

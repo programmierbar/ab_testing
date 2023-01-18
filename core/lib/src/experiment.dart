@@ -94,12 +94,10 @@ class EnumeratedExperiment<T extends Enum> extends AdaptedExperiment<T> {
   @override
   T get value {
     if (active) {
-      try {
-        final value = _adapter.get<String>(id);
-        if (value != null) {
-          return variants.byName(value);
-        }
-      } catch (_) {}
+      final value = _adapter.get<String>(id);
+      if (value != null) {
+        return variants.byName(value);
+      }
     }
     return defaultVariant;
   }
