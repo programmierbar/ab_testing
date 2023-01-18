@@ -1,3 +1,10 @@
+## 0.13.0
+
+> Note: This release has breaking changes.
+
+ - **FEAT**: Add CachingAdapter to improve production setups. ([1a59f1cb](https://github.com/programmierbar/ab_testing/commit/1a59f1cbadec513f5c0c12aba452a86034c40dda))
+ - **BREAKING** **FIX**: resolve inactive value on load in FirebaseAdapter. ([dd26ff39](https://github.com/programmierbar/ab_testing/commit/dd26ff39f7e25e6edea083fea9abfe85f32ccfc8))
+
 ## 0.12.0+1
 
  - **FIX**: active flag check and parsing of invalid enum variants. ([16f7ed80](https://github.com/programmierbar/ab_testing/commit/16f7ed80cdf33e56034cfaa9aa4daf0c6b7db5e9))

@@ -1,3 +1,11 @@
+## 0.11.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**: version of firebase package. ([906ebbac](https://github.com/programmierbar/ab_testing/commit/906ebbacd194e54eab80aa0370134c5242961964))
+ - **FEAT**: Add CachingAdapter to improve production setups. ([1a59f1cb](https://github.com/programmierbar/ab_testing/commit/1a59f1cbadec513f5c0c12aba452a86034c40dda))
+ - **BREAKING** **FIX**: resolve inactive value on load in FirebaseAdapter. ([dd26ff39](https://github.com/programmierbar/ab_testing/commit/dd26ff39f7e25e6edea083fea9abfe85f32ccfc8))
+
 ## 0.10.0+5
 
  - Update a dependency to the latest release.
