@@ -1,3 +1,7 @@
+## 0.10.0+5
+
+ - Update a dependency to the latest release.
+
 ## 0.10.0+4
 
  - **FIX**: dependencies. ([83d3c97a](https://github.com/programmierbar/ab_testing/commit/83d3c97a05fe23087bce8c57a2fb8a7dd5e02072))

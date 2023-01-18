@@ -2,7 +2,7 @@ name: ab_testing_firebase
 description:
   Extends ab_testing_core to support remote A/B testing with Firebase Remote
   Config.
-version: 0.10.0+4
+version: 0.10.0+5
 repository: https://github.com/programmierbar/ab_testing
 issue_tracker: https://github.com/programmierbar/ab_testing/issues
 

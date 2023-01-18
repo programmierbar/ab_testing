@@ -1,3 +1,8 @@
+## 0.12.0+1
+
+ - **FIX**: active flag check and parsing of invalid enum variants. ([16f7ed80](https://github.com/programmierbar/ab_testing/commit/16f7ed80cdf33e56034cfaa9aa4daf0c6b7db5e9))
+ - **FIX**: Fix check for existing value in active property. ([295a6f87](https://github.com/programmierbar/ab_testing/commit/295a6f874951f509250102ad8cb1e8454f3d5684))
+
 ## 0.12.0
 
 > Note: This release has breaking changes.
