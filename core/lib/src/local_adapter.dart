@@ -13,6 +13,9 @@ class LocalExperimentAdapter extends ExperimentAdapter {
   /// to deterministically select active experiments and experiment values.
   final FutureOr<int> Function() resolveUserSeed;
 
+  @override
+  final List<AdaptedExperiment> experiments = [];
+
   final Map<String, Object> _values = {};
 
   LocalExperimentAdapter({required this.resolveUserSeed});

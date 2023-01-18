@@ -16,6 +16,9 @@ class FirebaseExperimentAdapter extends UpdatableExperimentAdapter {
   /// The logger that will be used by this adapter.
   final ExperimentLogger? logger;
 
+  @override
+  final List<AdaptedExperiment> experiments = [];
+
   final _fetchTimeout = const Duration(minutes: 1); // SDK default
   Map<String, RemoteConfigValue> _values = {};
 
@@ -86,8 +89,6 @@ class FirebaseExperimentAdapter extends UpdatableExperimentAdapter {
       final variantValue = value.asString();
       return variantValue.isEmpty || variantValue == config.inactiveVariantValue;
     });
-    print(
-        '------------> updated firebase values: ${_values.entries.map((entry) => '${entry.key}: ${entry.value.asString()}')}');
   }
 
   Future<void> _setFetchInterval(Duration duration) {

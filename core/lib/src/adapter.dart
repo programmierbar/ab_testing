@@ -7,7 +7,7 @@ import 'package:ab_testing_core/src/experiment.dart';
 /// An adapter must be initialized before it can be used by calling [init].
 abstract class ExperimentAdapter {
   /// The experiments that are registered with this adapter.
-  final List<AdaptedExperiment> experiments = [];
+  List<AdaptedExperiment> get experiments;
 
   /// Initializes this adapter.
   Future<void> init(ExperimentConfig config);
