@@ -29,7 +29,7 @@ class LocalExperimentAdapter extends ExperimentAdapter {
 
     final activeExperiments = experiments.where((experiment) {
       // Check if the user falls into the sample size of the local experiment.
-      return experiment.active && userSegment < experiment.sampleSize;
+      return experiment.enabled && userSegment < experiment.sampleSize;
     });
 
     for (final experiment in activeExperiments) {

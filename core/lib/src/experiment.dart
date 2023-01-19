@@ -50,23 +50,23 @@ class AdaptedExperiment<T> implements Experiment<T> {
   /// [ExperimentAdapter]s do.
   final double sampleSize;
 
-  final bool _active;
+  final bool enabled;
 
   /// Creates a new [AdaptedExperiment].
   AdaptedExperiment(
     this._adapter,
     this.id,
-    bool active,
+    this.enabled,
     this.defaultVariant,
     this.weightedVariants,
     this.sampleSize,
-  ) : _active = active;
+  );
 
   @override
-  bool get active => _active ? _adapter.has(id) : false;
+  bool get active => enabled ? _adapter.has(id) : false;
 
   @override
-  T get value => _active ? _adapter.get<T>(id) ?? defaultVariant : defaultVariant;
+  T get value => enabled ? _adapter.get<T>(id) ?? defaultVariant : defaultVariant;
 
   @override
   String get trackingValue => value.toString();

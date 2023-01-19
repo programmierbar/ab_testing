@@ -23,10 +23,13 @@ class ExperimentConfig {
     this.inactiveVariantValue,
   }) : _logger = logger;
 
-  /// All active experiments.
-  List<Experiment> get experiments => _allExperiments.where((value) => value.active).toList();
+  Iterable<AdaptedExperiment> get _allExperiments => _adapters.expand((adapter) => adapter.experiments);
 
-  List<Experiment> get _allExperiments => _adapters.expand((adapter) => adapter.experiments).toList();
+  /// All enabled experiments
+  List<Experiment> get enabledExperiments => _allExperiments.where((experiment) => experiment.enabled).toList();
+
+  /// All active experiments.
+  List<Experiment> get activeExperiments => _allExperiments.where((experiment) => experiment.active).toList();
 
   /// Returns a mapping of all experiments from their id to their tracking
   /// value.
@@ -36,7 +39,7 @@ class ExperimentConfig {
   /// will not be included in the mapping.
   Map<String, String> get trackingValues {
     return {
-      for (final experiment in _allExperiments)
+      for (final experiment in enabledExperiments)
         if (experiment.active)
           experiment.id: experiment.trackingValue
         else if (inactiveVariantValue != null)

@@ -25,12 +25,12 @@ abstract class ExperimentAdapter {
     bool defaultVariant = false,
     Map<bool, int>? weightedVariants,
     double sampleSize = 1,
-    bool active = true,
+    bool enabled = true,
   }) {
     return _add(AdaptedExperiment<bool>(
       this,
       id,
-      active,
+      enabled,
       defaultVariant,
       weightedVariants ?? {true: 1, false: 1},
       sampleSize,
@@ -44,12 +44,12 @@ abstract class ExperimentAdapter {
     List<int>? variants,
     Map<int, int>? weightedVariants,
     double sampleSize = 1,
-    bool active = true,
+    bool enabled = true,
   }) {
     return _add(AdaptedExperiment<int>(
       this,
       id,
-      active,
+      enabled,
       defaultVariant,
       weightedVariants ?? variants?.defaultWeightedVariants,
       sampleSize,
@@ -63,12 +63,12 @@ abstract class ExperimentAdapter {
     List<String>? variants,
     Map<String, int>? weightedVariants,
     double sampleSize = 1,
-    bool active = true,
+    bool enabled = true,
   }) {
     return _add(AdaptedExperiment<String>(
       this,
       id,
-      active,
+      enabled,
       defaultVariant,
       weightedVariants ?? variants?.defaultWeightedVariants,
       sampleSize,
@@ -82,7 +82,7 @@ abstract class ExperimentAdapter {
     List<T>? variants,
     Map<T, int>? weightedVariants,
     double sampleSize = 1,
-    bool active = true,
+    bool enabled = true,
   }) {
     assert(
       variants != null || weightedVariants != null,
@@ -91,7 +91,7 @@ abstract class ExperimentAdapter {
     return _add(EnumeratedExperiment<T>(
       this,
       id,
-      active,
+      enabled,
       defaultVariant,
       weightedVariants ?? variants!.defaultWeightedVariants,
       sampleSize,
