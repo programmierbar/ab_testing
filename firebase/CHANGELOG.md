@@ -1,3 +1,10 @@
+## 0.12.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**: Package version. ([47674c95](https://github.com/programmierbar/ab_testing/commit/47674c95ff1cc20836636bf9b711da7403f02f2f))
+ - **BREAKING** **FEAT**: Move update method to base ExperimentAdapter. ([7f227215](https://github.com/programmierbar/ab_testing/commit/7f2272155db1a70b2f734f4c049105f9c576d6a7))
+
 ## 0.11.0
 
 > Note: This release has breaking changes.

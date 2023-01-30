@@ -1,3 +1,10 @@
+## 0.14.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**: Move update method to base ExperimentAdapter. ([7f227215](https://github.com/programmierbar/ab_testing/commit/7f2272155db1a70b2f734f4c049105f9c576d6a7))
+ - **BREAKING** **FEAT**: Change enabled and active flag handling. ([2169e744](https://github.com/programmierbar/ab_testing/commit/2169e744cfca2fe6618c4f2b87900e72a56fd0f6))
+
 ## 0.13.0
 
 > Note: This release has breaking changes.
