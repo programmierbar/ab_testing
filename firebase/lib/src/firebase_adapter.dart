@@ -3,7 +3,7 @@ import 'package:firebase_remote_config/firebase_remote_config.dart';
 
 /// An [ExperimentAdapter] that uses the Firebase Remote Config SDK to fetch
 /// experiment values.
-class FirebaseExperimentAdapter extends UpdatableExperimentAdapter {
+class FirebaseExperimentAdapter extends ExperimentAdapter {
   /// The Firebase Remote Config instance that will be used to fetch values.
   ///
   /// If no value is provided, [FirebaseRemoteConfig.instance] will be used.

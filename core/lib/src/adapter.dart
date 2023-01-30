@@ -12,6 +12,11 @@ abstract class ExperimentAdapter {
   /// Initializes this adapter.
   Future<void> init(ExperimentConfig config);
 
+  /// Updates the values for all experiments, if appropriate.
+  ///
+  /// If [force] is true, the values will be updated regardless of whether they are stale.
+  Future<void> update(ExperimentConfig config, {bool force = false});
+
   /// Returns whether this adapter has a value for the experiment with the given
   /// [id].
   bool has(String id);
@@ -106,15 +111,6 @@ abstract class ExperimentAdapter {
     experiments.add(experiment);
     return experiment;
   }
-}
-
-/// An [ExperimentAdapter] that might be able to fetch new values.
-abstract class UpdatableExperimentAdapter extends ExperimentAdapter {
-  /// Updates the values for all experiments, if appropriate.
-  ///
-  /// If [force] is true, the values will be updated regardless of whether they
-  /// are stale.
-  Future<void> update(ExperimentConfig config, {bool force = false});
 }
 
 extension _DefaultWeightedVariants<T> on List<T> {

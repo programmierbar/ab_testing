@@ -38,6 +38,9 @@ class LocalExperimentAdapter extends ExperimentAdapter {
   }
 
   @override
+  Future<void> update(ExperimentConfig config, {bool force = false}) async {}
+
+  @override
   bool has(String id) => _values.containsKey(id);
 
   @override

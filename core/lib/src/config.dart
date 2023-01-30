@@ -50,18 +50,14 @@ class ExperimentConfig {
   /// Initializes all adapters.
   Future<void> init() async {
     await Future.wait(_adapters.map((adapter) => adapter.init(this)));
-    update();
     _logger?.logExperiments(this);
   }
 
   /// Updates all updatable adapters.
   Future<void> update({bool force = false}) async {
-    final adapters = _adapters.whereType<UpdatableExperimentAdapter>();
-    if (adapters.isNotEmpty) {
-      await Future.wait(adapters.map((adapter) => adapter.update(this, force: force)));
-      if (force) {
-        _logger?.logExperiments(this);
-      }
+    await Future.wait(_adapters.map((adapter) => adapter.update(this, force: force)));
+    if (force) {
+      _logger?.logExperiments(this);
     }
   }
 }

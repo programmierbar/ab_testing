@@ -17,6 +17,9 @@ class CachingExperimentAdapter extends ExperimentAdapter {
   Future<void> init(ExperimentConfig config) => _adapter.init(config);
 
   @override
+  Future<void> update(ExperimentConfig config, {bool force = false}) => _adapter.update(config, force: force);
+
+  @override
   bool has(String id) => _values.containsKey(id) || _adapter.has(id);
 
   @override
