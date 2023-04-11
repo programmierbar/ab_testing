@@ -28,10 +28,10 @@ class ExperimentConfig {
   Iterable<AdaptedExperiment> get allExperiments => _adapters.expand((adapter) => adapter.experiments);
 
   /// All enabled experiments
-  List<Experiment> get enabledExperiments => _allExperiments.where((experiment) => experiment.enabled).toList();
+  List<Experiment> get enabledExperiments => allExperiments.where((experiment) => experiment.enabled).toList();
 
   /// All active experiments.
-  List<Experiment> get activeExperiments => _allExperiments.where((experiment) => experiment.active).toList();
+  List<Experiment> get activeExperiments => allExperiments.where((experiment) => experiment.active).toList();
 
   /// Returns a mapping of all experiments from their id to their tracking
   /// value.
