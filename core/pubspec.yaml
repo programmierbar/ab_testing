@@ -1,6 +1,5 @@
 name: ab_testing_core
-description:
-  A/B testing for user experience research through randomized experiments that
+description: A/B testing for user experience research through randomized experiments that
   involve two or more variants.
 version: 0.14.0
 repository: https://github.com/programmierbar/ab_testing
@@ -8,6 +7,9 @@ issue_tracker: https://github.com/programmierbar/ab_testing/issues
 
 environment:
   sdk: '>=2.18.0 <3.0.0'
+
+dependencies:
+  meta: ^1.8.0
 
 dev_dependencies:
   lints: ^2.0.1
