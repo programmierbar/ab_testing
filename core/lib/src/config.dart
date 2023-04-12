@@ -1,6 +1,5 @@
 import 'package:ab_testing_core/src/adapter.dart';
 import 'package:ab_testing_core/src/experiment.dart';
-import 'package:meta/meta.dart';
 
 /// A logger that is used to log experiment information.
 abstract class ExperimentLogger {
@@ -24,7 +23,6 @@ class ExperimentConfig {
     this.inactiveVariantValue,
   }) : _logger = logger;
 
-  @protected
   Iterable<AdaptedExperiment> get allExperiments => _adapters.expand((adapter) => adapter.experiments);
 
   /// All enabled experiments
@@ -32,6 +30,9 @@ class ExperimentConfig {
 
   /// All active experiments.
   List<Experiment> get activeExperiments => allExperiments.where((experiment) => experiment.active).toList();
+
+  /// All inactive experiments.
+  List<Experiment> get inactiveExperiments => allExperiments.where((experiment) => !experiment.active).toList();
 
   /// Returns a mapping of all experiments from their id to their tracking
   /// value.
