@@ -1,3 +1,11 @@
+## 0.13.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**: Package version.
+ - **DOCS**: fix headings in CHANGELOGs.
+ - **BREAKING** **FEAT**: Move update method to base ExperimentAdapter.
+
 ## 0.12.0
 
 > Note: This release has breaking changes.

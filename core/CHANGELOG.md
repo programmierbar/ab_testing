@@ -1,3 +1,12 @@
+## 0.15.0
+
+> Note: This release has breaking changes.
+
+ - **FEAT**: inactive experiments getter ([#4](https://github.com/programmierbar/ab_testing/issues/4)).
+ - **DOCS**: fix headings in CHANGELOGs.
+ - **BREAKING** **FEAT**: Move update method to base ExperimentAdapter.
+ - **BREAKING** **FEAT**: Change enabled and active flag handling.
+
 ## 0.14.0
 
 > Note: This release has breaking changes.
