@@ -2,16 +2,9 @@ name: ab_testing
 repository: https://github.com/programmierbar/ab_testing
 
 packages:
-  - .
   - core
   - firebase
   - example
-
-command:
-  bootstrap:
-    usePubspecOverrides: true
-  version:
-    linkToCommits: true
 
 scripts:
   format: dart format .
