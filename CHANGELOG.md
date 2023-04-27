@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2023-04-27
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
+ - [`ab_testing_core` - `v0.16.0+1`](#ab_testing_core---v01601)
+ - [`ab_testing_firebase` - `v0.13.0+1`](#ab_testing_firebase---v01301)
+
+---
+
+#### `ab_testing_core` - `v0.16.0+1`
+
+ - **DOCS**: fix headings in CHANGELOGs.
+
+#### `ab_testing_firebase` - `v0.13.0+1`
+
+ - **DOCS**: fix headings in CHANGELOGs.
+
+
 ## 2023-04-14
 
 ### Changes

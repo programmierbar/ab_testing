@@ -1,3 +1,7 @@
+## 0.16.0+1
+
+ - **DOCS**: fix headings in CHANGELOGs.
+
 ## 0.16.0
 
 > Note: This release has breaking changes.
