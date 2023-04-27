@@ -22,6 +22,10 @@ abstract class Experiment<T> {
   String get trackingValue;
 }
 
+abstract class CustomExperiment {
+  Future<void> init();
+}
+
 /// An [Experiment] that is backed by an [ExperimentAdapter].
 class AdaptedExperiment<T> implements Experiment<T> {
   final ExperimentAdapter _adapter;
