@@ -1,3 +1,10 @@
+## 0.16.0
+
+> Note: This release has breaking changes.
+
+- **FEAT**: Provide support for custom experiments
+- **BREAKING** **FEAT**: Rename allExperiments getter to experiments.
+
 ## 0.15.0
 
 > Note: This release has breaking changes.

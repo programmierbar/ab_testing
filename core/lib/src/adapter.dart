@@ -32,7 +32,7 @@ abstract class ExperimentAdapter {
     double sampleSize = 1,
     bool enabled = true,
   }) {
-    return _add(AdaptedExperiment<bool>(
+    return add(AdaptedExperiment<bool>(
       this,
       id,
       enabled,
@@ -51,7 +51,7 @@ abstract class ExperimentAdapter {
     double sampleSize = 1,
     bool enabled = true,
   }) {
-    return _add(AdaptedExperiment<int>(
+    return add(AdaptedExperiment<int>(
       this,
       id,
       enabled,
@@ -70,7 +70,7 @@ abstract class ExperimentAdapter {
     double sampleSize = 1,
     bool enabled = true,
   }) {
-    return _add(AdaptedExperiment<String>(
+    return add(AdaptedExperiment<String>(
       this,
       id,
       enabled,
@@ -93,7 +93,7 @@ abstract class ExperimentAdapter {
       variants != null || weightedVariants != null,
       'Either variants or weightedVariants must be provided.',
     );
-    return _add(EnumeratedExperiment<T>(
+    return add(EnumeratedExperiment<T>(
       this,
       id,
       enabled,
@@ -103,7 +103,7 @@ abstract class ExperimentAdapter {
     ));
   }
 
-  Experiment<T> _add<T>(AdaptedExperiment<T> experiment) {
+  Experiment<T> add<T>(AdaptedExperiment<T> experiment) {
     assert(
       !experiments.any((lookup) => lookup.id == experiment.id),
       'Another Experiment with id ${experiment.id} is already defined.',
