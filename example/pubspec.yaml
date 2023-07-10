@@ -7,7 +7,7 @@ environment:
   sdk: '>=2.18.0 <3.0.0'
 
 dependencies:
-  ab_testing_core: ^0.16.0+1
+  ab_testing_core: ^0.16.0+2
   ab_testing_firebase: ^0.13.0+1
   cupertino_icons: ^1.0.2
   firebase_core: ^2.4.1
