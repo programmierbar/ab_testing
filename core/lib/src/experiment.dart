@@ -100,7 +100,11 @@ class EnumeratedExperiment<T extends Enum> extends AdaptedExperiment<T> {
     if (active) {
       final value = _adapter.get<String>(id);
       if (value != null) {
-        return variants.byName(value);
+        try {
+          return variants.byName(value);
+        } catch (_) {
+          // Fallback to default variant
+        }
       }
     }
     return defaultVariant;
