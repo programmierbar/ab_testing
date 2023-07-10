@@ -1,6 +1,6 @@
 ## 0.13.0+1
 
- - **DOCS**: fix headings in CHANGELOGs.
+ - Update a dependency to the latest release.
 
 ## 0.13.0
 

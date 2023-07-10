@@ -1,5 +1,7 @@
 ## 0.16.0+2
 
+- **FEAT**: Use default variant on invalid values for enumerated experiments.
+
 ## 0.16.0+1
 
  - **DOCS**: fix headings in CHANGELOGs.
