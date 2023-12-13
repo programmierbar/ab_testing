@@ -25,11 +25,21 @@ class LocalExperimentAdapter extends ExperimentAdapter {
     if (experiments.isEmpty) return;
 
     final userSeed = await resolveUserSeed();
-    final userSegment = Random(userSeed).nextDouble();
 
     final activeExperiments = experiments.where((experiment) {
+      if (!experiment.enabled) {
+        return false;
+      } else if (experiment.sampleSize == 1) {
+        return true;
+      }
+
+      // Build unique seed for each experiment by combining user seed and experiment id
+      // to ensure different user segments for each experiment.
+      final seed = experiment.id.hashCode ^ userSeed;
+      final userSegment = Random(seed).nextDouble();
+
       // Check if the user falls into the sample size of the local experiment.
-      return experiment.enabled && userSegment < experiment.sampleSize;
+      return userSegment < experiment.sampleSize;
     });
 
     for (final experiment in activeExperiments) {

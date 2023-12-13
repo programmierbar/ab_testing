@@ -1,3 +1,9 @@
+## 1.0.0
+
+> Note: This release has breaking changes.
+
+- **BREAKING** **FEAT**: Update a dependency to the latest release.
+
 ## 0.13.0+2
 
 - Update a dependency to the latest release.

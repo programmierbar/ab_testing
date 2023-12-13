@@ -1,3 +1,10 @@
+## 1.0.0
+
+> Note: This release has breaking changes.
+
+- **FEAT**: Add `ChainedExperimentAdapter`.
+- **BREAKING** **FEAT**: Ensure different user segments for each experiment in `LocalAdapter`.
+
 ## 0.16.0+2
 
 - **FEAT**: Use default variant on invalid values for enumerated experiments.
