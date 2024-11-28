@@ -1,3 +1,7 @@
+## 1.0.1
+
+ - **FIX**: Explicitly add experiment to nested adapter in CachingAdapter.
+
 ## 1.0.0
 
 > Note: This release has breaking changes.
