@@ -24,4 +24,7 @@ class CachingExperimentAdapter extends ExperimentAdapter {
 
   @override
   T? get<T>(String id) => _values.putIfAbsent(id, () => _adapter.get<T>(id));
+
+  @override
+  Experiment<T> add<T>(AdaptedExperiment<T> experiment) => _adapter.add(experiment);
 }
