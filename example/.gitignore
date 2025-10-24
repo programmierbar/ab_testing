@@ -49,3 +49,4 @@ app.*.map.json
 /ios/Podfile.lock
 /android/app/google-services.json
 /ios/Runner/GoogleService-Info.plist
+/firebase.json
