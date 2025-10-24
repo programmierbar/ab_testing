@@ -77,7 +77,7 @@ class _ExperimentPageState extends State<_ExperimentPage> {
               ),
               const SizedBox(height: 50),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.white.withOpacity(0.3)),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.white.withValues(alpha: 0.3)),
                 onPressed: () async {
                   await experiments.update(force: true);
                   setState(() {});
@@ -119,7 +119,7 @@ class _ExperimentContainer extends StatelessWidget {
         height: 35,
         width: 325,
         decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.3),
+          color: Colors.black.withValues(alpha: 0.3),
           borderRadius: const BorderRadius.all(Radius.circular(5)),
         ),
         child: Padding(
