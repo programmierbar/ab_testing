@@ -15,4 +15,4 @@ dependencies:
   firebase_remote_config: ^4.0.0
 
 dev_dependencies:
-  lints: ^2.0.1
+  lints: ^6.0.0
