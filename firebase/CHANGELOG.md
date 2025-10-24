@@ -1,5 +1,8 @@
-## 1.0.2
+## 2.0.0
 
+> Note: This release has breaking changes.
+
+ - **BREAKING**: Requires iOS 15.0 or higher (due to Firebase SDK 12.4.0 requirement)
  - Update firebase_core to ^4.2.0 and firebase_remote_config to ^6.1.0
 
 ## 1.0.1
