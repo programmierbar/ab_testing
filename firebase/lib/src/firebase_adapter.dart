@@ -22,7 +22,8 @@ class FirebaseExperimentAdapter extends ExperimentAdapter {
   final _fetchTimeout = const Duration(minutes: 1); // SDK default
   Map<String, RemoteConfigValue> _values = {};
 
-  FirebaseRemoteConfig get _remoteConfig => remoteConfig ?? FirebaseRemoteConfig.instance;
+  FirebaseRemoteConfig get _remoteConfig =>
+      remoteConfig ?? FirebaseRemoteConfig.instance;
 
   FirebaseExperimentAdapter({
     this.remoteConfig,
@@ -87,7 +88,8 @@ class FirebaseExperimentAdapter extends ExperimentAdapter {
     _values = _remoteConfig.getAll();
     _values.removeWhere((key, value) {
       final variantValue = value.asString();
-      return variantValue.isEmpty || variantValue == config.inactiveVariantValue;
+      return variantValue.isEmpty ||
+          variantValue == config.inactiveVariantValue;
     });
   }
 

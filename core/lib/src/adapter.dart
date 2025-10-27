@@ -114,5 +114,6 @@ abstract class ExperimentAdapter {
 }
 
 extension _DefaultWeightedVariants<T> on List<T> {
-  Map<T, int> get defaultWeightedVariants => asMap().map((_, variant) => MapEntry(variant, 1));
+  Map<T, int> get defaultWeightedVariants =>
+      asMap().map((_, variant) => MapEntry(variant, 1));
 }

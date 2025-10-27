@@ -70,7 +70,8 @@ class AdaptedExperiment<T> implements Experiment<T> {
   bool get active => enabled ? _adapter.has(id) : false;
 
   @override
-  T get value => enabled ? _adapter.get<T>(id) ?? defaultVariant : defaultVariant;
+  T get value =>
+      enabled ? _adapter.get<T>(id) ?? defaultVariant : defaultVariant;
 
   @override
   String get trackingValue => value.toString();
