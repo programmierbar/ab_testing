@@ -5,9 +5,10 @@ description:
 version: 2.0.0
 repository: https://github.com/programmierbar/ab_testing
 issue_tracker: https://github.com/programmierbar/ab_testing/issues
+resolution: workspace
 
 environment:
-  sdk: '>=2.18.0 <4.0.0'
+  sdk: '>=3.5.0 <4.0.0'
 
 dependencies:
   ab_testing_core: ^1.0.1

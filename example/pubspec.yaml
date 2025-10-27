@@ -2,13 +2,14 @@ name: ab_testing_example
 description: An example Flutter project for the ab_testing package.
 publish_to: 'none'
 version: 1.0.0+1
+resolution: workspace
 
 environment:
-  sdk: '>=2.18.0 <4.0.0'
+  sdk: '>=3.5.0 <4.0.0'
 
 dependencies:
   ab_testing_core: ^1.0.1
-  ab_testing_firebase: ^1.0.2
+  ab_testing_firebase: ^2.0.0
   cupertino_icons: ^1.0.2
   firebase_core: ^4.2.0
   firebase_remote_config: ^6.1.0

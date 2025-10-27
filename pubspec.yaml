@@ -1,8 +1,20 @@
 name: ab_testing_workspace
+publish_to: none
 
 environment:
-  sdk: '>=2.18.0 <4.0.0'
+  sdk: '>=3.5.0 <4.0.0'
+
+workspace:
+  - core
+  - firebase
+  - example
 
 dev_dependencies:
   lints: ^6.0.0
   melos: ^7.0.0
+
+melos:
+  scripts:
+    format: dart format .
+    format:check: dart format --set-exit-if-changed .
+    analyze: dart analyze --fatal-infos .
