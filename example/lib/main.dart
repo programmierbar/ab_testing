@@ -9,7 +9,8 @@ import 'package:provider/provider.dart';
 /// Initialize the local experiments adapter with an consistent seed for each user.
 final _localExperiments = LocalExperimentAdapter(resolveUserSeed: () => 1234);
 final _remoteExperiments = FirebaseExperimentAdapter();
-final _experimentConfig = ExampleExperimentConfig(_localExperiments, _remoteExperiments);
+final _experimentConfig =
+    ExampleExperimentConfig(_localExperiments, _remoteExperiments);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

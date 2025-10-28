@@ -16,7 +16,10 @@ class ExampleExperimentConfig extends ExperimentConfig {
     ExperimentAdapter remoteExperiments, [
     ExperimentLogger? logger,
   ])  : _booleanExperiment = localExperiments.boolean(id: 'local_bool'),
-        _numericExperiment = localExperiments.numeric(id: 'local_int'),
+        _numericExperiment = localExperiments.numeric(
+          id: 'local_int',
+          variants: [0, 1, 2, 3],
+        ),
         _textExperiment = remoteExperiments.text(id: 'remote_text'),
         _enumeratedExperiment = remoteExperiments.enumerated(
           id: 'remote_enum',

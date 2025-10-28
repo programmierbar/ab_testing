@@ -27,14 +27,20 @@ class _ExperimentPage extends StatefulWidget {
 class _ExperimentPageState extends State<_ExperimentPage> {
   @override
   Widget build(BuildContext context) {
-    final experiments = Provider.of<ExampleExperimentConfig>(context, listen: false);
+    final experiments =
+        Provider.of<ExampleExperimentConfig>(context, listen: false);
 
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xff3C0A87), Color(0xff32044F), Color(0xff21022C), Color(0xff050007)],
+          colors: [
+            Color(0xff3C0A87),
+            Color(0xff32044F),
+            Color(0xff21022C),
+            Color(0xff050007)
+          ],
         ),
       ),
       child: Scaffold(
@@ -47,12 +53,16 @@ class _ExperimentPageState extends State<_ExperimentPage> {
                 child: Center(
                   child: Text(
                     'A/B Testing',
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 15),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 50, horizontal: 15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -77,7 +87,8 @@ class _ExperimentPageState extends State<_ExperimentPage> {
               ),
               const SizedBox(height: 50),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.white.withOpacity(0.3)),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white.withValues(alpha: 0.3)),
                 onPressed: () async {
                   await experiments.update(force: true);
                   setState(() {});
@@ -111,7 +122,8 @@ class _ExperimentContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const textStyle = TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14);
+    const textStyle = TextStyle(
+        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14);
 
     return Padding(
       padding: const EdgeInsets.all(8),
@@ -119,14 +131,17 @@ class _ExperimentContainer extends StatelessWidget {
         height: 35,
         width: 325,
         decoration: BoxDecoration(
-          color: Colors.black.withOpacity(0.3),
+          color: Colors.black.withValues(alpha: 0.3),
           borderRadius: const BorderRadius.all(Radius.circular(5)),
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Row(
             children: [
-              SizedBox(width: 175, child: Text(name, style: textStyle.copyWith(color: Colors.purpleAccent))),
+              SizedBox(
+                  width: 175,
+                  child: Text(name,
+                      style: textStyle.copyWith(color: Colors.purpleAccent))),
               Text(value.toString(), style: textStyle),
             ],
           ),

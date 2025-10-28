@@ -12,7 +12,8 @@ class ChainedExperimentAdapter extends ExperimentAdapter {
   final ExperimentAdapter overrideAdapter;
 
   @override
-  List<AdaptedExperiment<Object?>> get experiments => defaultAdapter.experiments;
+  List<AdaptedExperiment<Object?>> get experiments =>
+      defaultAdapter.experiments;
 
   @override
   T? get<T>(String id) {

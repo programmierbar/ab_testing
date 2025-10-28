@@ -17,7 +17,8 @@ class CachingExperimentAdapter extends ExperimentAdapter {
   Future<void> init(ExperimentConfig config) => _adapter.init(config);
 
   @override
-  Future<void> update(ExperimentConfig config, {bool force = false}) => _adapter.update(config, force: force);
+  Future<void> update(ExperimentConfig config, {bool force = false}) =>
+      _adapter.update(config, force: force);
 
   @override
   bool has(String id) => _values.containsKey(id) || _adapter.has(id);
@@ -26,5 +27,6 @@ class CachingExperimentAdapter extends ExperimentAdapter {
   T? get<T>(String id) => _values.putIfAbsent(id, () => _adapter.get<T>(id));
 
   @override
-  Experiment<T> add<T>(AdaptedExperiment<T> experiment) => _adapter.add(experiment);
+  Experiment<T> add<T>(AdaptedExperiment<T> experiment) =>
+      _adapter.add(experiment);
 }

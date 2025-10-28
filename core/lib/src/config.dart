@@ -23,13 +23,16 @@ class ExperimentConfig {
     this.inactiveVariantValue,
   }) : _logger = logger;
 
-  Iterable<AdaptedExperiment> get experiments => _adapters.expand((adapter) => adapter.experiments);
+  Iterable<AdaptedExperiment> get experiments =>
+      _adapters.expand((adapter) => adapter.experiments);
 
   /// All enabled experiments
-  List<Experiment> get enabledExperiments => experiments.where((experiment) => experiment.enabled).toList();
+  List<Experiment> get enabledExperiments =>
+      experiments.where((experiment) => experiment.enabled).toList();
 
   /// All active experiments.
-  List<Experiment> get activeExperiments => experiments.where((experiment) => experiment.active).toList();
+  List<Experiment> get activeExperiments =>
+      experiments.where((experiment) => experiment.active).toList();
 
   /// Returns a mapping of all experiments from their id to their tracking
   /// value.
@@ -50,13 +53,16 @@ class ExperimentConfig {
   /// Initializes all adapters.
   Future<void> init() async {
     await Future.wait(_adapters.map((adapter) => adapter.init(this)));
-    await Future.wait(experiments.whereType<CustomExperiment>().map((experiment) => experiment.init()));
+    await Future.wait(experiments
+        .whereType<CustomExperiment>()
+        .map((experiment) => experiment.init()));
     _logger?.logExperiments(this);
   }
 
   /// Updates all updatable adapters.
   Future<void> update({bool force = false}) async {
-    await Future.wait(_adapters.map((adapter) => adapter.update(this, force: force)));
+    await Future.wait(
+        _adapters.map((adapter) => adapter.update(this, force: force)));
     if (force) {
       _logger?.logExperiments(this);
     }
