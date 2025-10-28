@@ -1,3 +1,7 @@
+## 1.0.3
+
+- **CHORE**: Update dev dependencies.
+
 ## 1.0.1
 
  - **FIX**: Explicitly add experiment to nested adapter in CachingAdapter.

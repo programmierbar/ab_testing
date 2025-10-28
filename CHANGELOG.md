@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2025-10-28
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+- [`ab_testing_firebase` - `v2.0.0`](#ab_testing_firebase---v200)
+
+Packages with other changes:
+
+- [`ab_testing_core` - `v1.0.3`](#ab_testing_core---v103)
+
+
+Packages with dependency updates only:
+
+> Packages listed below depend on other packages in this workspace that have had changes. Their versions have been incremented to bump the minimum dependency versions of the packages they depend upon in this project.
+
+- `ab_testing_core` - `v1.0.3`
+- `ab_testing_firebase` - `v2.0.0`
+
+---
+
 ## 2024-11-28
 
 ### Changes
